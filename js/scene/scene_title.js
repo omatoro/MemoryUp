@@ -3,11 +3,6 @@
  */
 (function(ns) {
 
-    ns.SCREEN_WIDTH = 465;
-    ns.SCREEN_HEIGHT = 465;
-    // var SCREEN_CENTER_X = SCREEN_WIDTH/2;
-    // var SCREEN_CENTER_Y = SCREEN_HEIGHT/2;
-
     ns.SceneTitle = tm.createClass({
         superClass : tm.app.TitleScene,
 

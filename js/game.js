@@ -1,9 +1,4 @@
 /**
- * ゲーム用ネームスペース作成、初期化処理
- */
-var game = game || {};
-
-/*
  * ゲーム起動処理
  */
 (function(ns) {
@@ -15,7 +10,7 @@ var game = game || {};
 
         // アプリケーション作成
         ns.app = tm.app.CanvasApp("#world");
-        ns.app.resizeWindow(); // 画面サイズに合わせる
+        ns.app.resize(ns.SCREEN_WIDTH, ns.SCREEN_HEIGHT); // 画面サイズに合わせる
         ns.app.fitWindow(); // リサイズ対応
         ns.app.background = "rgba(0, 0, 0, 0.1)"; // 背景色をセット
 

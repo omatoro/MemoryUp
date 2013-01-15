@@ -3,13 +3,6 @@
  */
 (function(ns) {
 
-    // ボタンサイズ
-    var BUTTON_SIZE_X = 213;
-    var BUTTON_SIZE_Y = 213;
-
-    // ボタンの描画位置
-    var BUTTON_START_DRAW_X = 320;
-
     ns.SceneMain = tm.createClass({
         superClass : tm.app.Scene,
 
@@ -22,12 +15,12 @@
                 // ボタン画像のロード
                 // ボタン画像のロード
                 this.sprite["number"][i] = tm.app.Sprite(
-                        BUTTON_SIZE_X,
-                        BUTTON_SIZE_Y,
+                        ns.BUTTON_SIZE_X,
+                        ns.BUTTON_SIZE_Y,
                         tm.graphics.TextureManager.get("num" + (i + 1)));
                 this.sprite["number"][i].setPosition(
-                        (i % 3)         * BUTTON_SIZE_X + (BUTTON_SIZE_X / 2),
-                        parseInt(i / 3) * BUTTON_SIZE_Y + (BUTTON_SIZE_Y / 2) + BUTTON_START_DRAW_X);
+                        (i % 3)         * ns.BUTTON_SIZE_X + (ns.BUTTON_SIZE_X / 2),
+                        parseInt(i / 3) * ns.BUTTON_SIZE_Y + (ns.BUTTON_SIZE_Y / 2) + ns.BUTTON_START_DRAW_X);
                 this.sprite["number"][i].speed = 0;  // 移動量を設定
                 this.addChild(this.sprite["number"][i]);
 
