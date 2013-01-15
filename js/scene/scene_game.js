@@ -18,16 +18,17 @@
 
             // 画像の読み込み
             for ( var i = 0; i < 9; ++i) {
-                // ボタン画像のロード
-                this.sprite["number"][i] = tm.app.Sprite(
+                // ボタン画像のロード 最後に配列に入れた方が高速＆シンプル
+                var sprite = tm.app.Sprite(
                         ns.BUTTON_SIZE_X,
                         ns.BUTTON_SIZE_Y,
                         tm.graphics.TextureManager.get("num" + (i + 1)));
-                this.sprite["number"][i].setPosition(
+                sprite.setPosition(
                         (i % 3)         * ns.BUTTON_SIZE_X + (ns.BUTTON_SIZE_X / 2),
                         parseInt(i / 3) * ns.BUTTON_SIZE_Y + (ns.BUTTON_SIZE_Y / 2) + ns.BUTTON_START_DRAW_X);
-                this.sprite["number"][i].speed = 0;  // 移動量を設定
-                this.addChild(this.sprite["number"][i]);
+                sprite.speed = 0;  // 移動量を設定
+                this.addChild(sprite);
+                this.sprite["number"][i] = sprite;
 
                 // ボタン暗転時の画像のロード(描画しないのでaddChildは行わない)
                 // @todo
