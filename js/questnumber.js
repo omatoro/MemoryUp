@@ -4,14 +4,15 @@
 (function(ns) {
 
     ns.QuestNumber = tm.createClass({
+
+        number : [],
+
         init : function(_back) {
 
             for ( var i = 0; i < _back + ns.QUESTNUM; ++i) {
                 this.number[i] = tm.util.Random.randint(0, 9);
             }
         },
-
-        number : [],
 
         // 引数の問題数目の答えを返す
         getAunwer : function(quest_number) {

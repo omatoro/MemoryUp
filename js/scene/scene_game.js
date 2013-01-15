@@ -4,7 +4,13 @@
 (function(ns) {
 
     ns.SceneMain = tm.createClass({
+
         superClass : tm.app.Scene,
+
+        sprite : {
+            number : {},
+            number_black : {}
+        },
 
         init : function() {
 
@@ -12,7 +18,6 @@
 
             // 画像の読み込み
             for ( var i = 0; i < 9; ++i) {
-                // ボタン画像のロード
                 // ボタン画像のロード
                 this.sprite["number"][i] = tm.app.Sprite(
                         ns.BUTTON_SIZE_X,
@@ -37,11 +42,6 @@
             this.drawedNum.y = 100; // Y軸
             this.drawedNum.width = 200; // 幅
             this.addChild(this.drawedNum); // シーンに追加
-        },
-
-        sprite : {
-            number : {},
-            number_black : {}
         },
 
         update : function() {

@@ -1,14 +1,19 @@
 /**
- * 問題作成
+ * 記憶ゲームクラス
  */
 (function(ns) {
 
-    var BUTTON_Y = 300;
-
-    /*
-     * 記憶ゲームクラス
-     */
     ns.Memory = tm.createClass({
+
+        // 何問前の回答を答えるか
+        back : 0,
+
+        // 問題のスタック
+        quest : {},
+
+        // 正解数
+        sum_result : 0,
+
         init : function(_back) {
 
             // 何問前の回答を答えるか
@@ -25,15 +30,6 @@
             this.quest = ns.QuestNumber();
         },
 
-        // 何問前の回答を答えるか
-        back : 0,
-
-        // 問題のスタック
-        quest : {},
-
-        // 正解数
-        sum_result : 0,
-
         // クリックした場所の取得
         getClickPosition : function() {
 
@@ -41,7 +37,7 @@
             var mouse_y = ns.app.pointing.y; // マウスのy位置を取得
 
             // ボタンの配置開始位置を引く
-            mouse_y -= BUTTON_Y;
+            mouse_y -= ns.BUTTON_Y;
 
             return {
                 x : mouse_x,

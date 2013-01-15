@@ -4,6 +4,7 @@
 (function(ns) {
 
     ns.SceneTitle = tm.createClass({
+
         superClass : tm.app.TitleScene,
 
         init : function() {
