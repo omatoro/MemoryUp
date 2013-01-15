@@ -1,8 +1,7 @@
 /**
  * リソースの読み込み
  */
-tm.preload(function(){
-    tm.graphics.TextureManager.add("sprite", "img/neko.jpg");
+tm.preload(function() {
 
     tm.graphics.TextureManager.add("num1", "img/1.png");
     tm.graphics.TextureManager.add("num2", "img/2.png");
