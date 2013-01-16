@@ -3,7 +3,7 @@
  */
 (function(ns) {
 
-    ns.run = function() {
+    tm.main(function() {
 
         // デバッグ時定数
         ns.DEBUG = true;
@@ -30,6 +30,6 @@
         // tmlibの実行
         this.app.run();
 
-    };
+    });
 
 })(game);
