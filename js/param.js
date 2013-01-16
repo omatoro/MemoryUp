@@ -19,6 +19,9 @@ var game = game || {};
     // 問題数
     ns.QUESTNUM = 10;
 
+    // 何問前の答えを答えるか
+    ns.BACK_NUMBER = 2;
+
     // ? 仮組みで作ったものなので後で整理する
     ns.BUTTON_Y = 300;
 
