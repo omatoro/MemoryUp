@@ -14,10 +14,13 @@
         quest : {},
 
         // 現在の問題数目
-        current_quest_numebr : 0,
+        current_quest_number : 0,
 
         // 現在のユーザの回答番号
         current_user_answer : 0,
+
+        // 一つ前のユーザ回答番号
+        past_user_answer : 0,
 
         // ユーザの回答履歴
         user_answer : [],
@@ -27,6 +30,12 @@
 
         // フレーム数のカウンタ
         count : 0,
+
+        // ゲームがスタートしたか
+        flagStartGame : false,
+
+        // 一度だけ実行できる関数を作る
+        once : {},
 
         init : function(_back) {
 
@@ -45,6 +54,8 @@
 
             // カウンターの初期化
             this.initCount();
+
+            this.once = ns.Once();
         },
 
         // カウンターの初期化
@@ -58,63 +69,9 @@
             return ns.app.pointing;
         },
 
+        // クリックしたかを返す
         isClick : function () {
             return ns.app.pointing.getPointingEnd();
-        },
-
-        // クリックした場所が正解かどうかを判定する
-        checkAnswer : function() {
-
-            // クリック位置取得
-            var mouse_position = getClickPosition();
-
-            // クリックした場所がボタンの場所でなかったら終了する
-            if (mouse_position.y < BUTTON_Y) {
-                return false;
-            }
-
-            // クリック位置でユーザの回答を探す
-            /*
-             * ボタンの配置 １２３ ４５６ ７８９ ０
-             */
-
-            // ボタンのサイズ
-            var button_size = {
-                x : ns.SCREEN_WIDTH / 3,
-                y : ns.SCREEN_HEIGHT / 3
-            };
-
-            var click_number_x = mouse_position.x / button_size.x | 0; // 横3列
-            var click_number_y = mouse_position.y / button_size.y | 0; // 縦4列
-
-            // 0の左右の位置であった場合は無視する
-            if (click_number_x === 0 && click_number_y === 3) {
-                return false;
-            } else if (click_number_x === 2 && click_number_y === 3) {
-                return false;
-            }
-
-            // 回答が正解か調べる
-            var user_answer = null;
-            if (click_number_x === 0 && click_number_y === 0) { user_answer = 1; }
-            if (click_number_x === 0 && click_number_y === 1) { user_answer = 2; }
-            if (click_number_x === 0 && click_number_y === 2) { user_answer = 3; }
-            if (click_number_x === 1 && click_number_y === 0) { user_answer = 4; }
-            if (click_number_x === 1 && click_number_y === 1) { user_answer = 5; }
-            if (click_number_x === 1 && click_number_y === 2) { user_answer = 6; }
-            if (click_number_x === 2 && click_number_y === 0) { user_answer = 7; }
-            if (click_number_x === 2 && click_number_y === 1) { user_answer = 8; }
-            if (click_number_x === 2 && click_number_y === 2) { user_answer = 9; }
-            if (click_number_x === 3 && click_number_y === 1) { user_answer = 0; }
-
-            var answer = quest[quest.length - this.back - 1]; // -1は配列が0開始なので
-
-            if (user_answer === answer) {
-                return true;
-            }
-
-            return false; // 何にも引っかかってない、エラー
-
         },
 
         // カウントアップ
@@ -157,31 +114,36 @@
             this.user_answer[this.user_answer.length] = number;
         },
 
-        // ユーザの回答をゲット
-        getUserAnswer : function () {
+        // ユーザの現在の回答をゲット
+        setCurrentUserAnswer : function () {
             // クリックされていなかったら以下処理を行わない
             if (this.isClick() === false) {
-                return 0;
+                return false;
             }
-            return this.current_user_answer;
+
+            this.past_user_answer    = this.current_user_answer;
+            this.current_user_answer = this.getUserAnswer() || this.current_user_answer;
+
+            return true;
+        },
+
+        // ユーザの過去の回答をゲット
+        getPastUserAnswer : function () {
+            return this.past_user_answer;
         },
 
         // 次の問題へ移行する
         nextQuest : function () {
-            ++this.currentquestnumebr;
+            ++this.current_quest_number;
+
+            // 過去入力分の暗転画像を元に戻す
+            // @todo past_user_answer
         },
 
-        // 入力箇所を暗転する
-//        drawBlack : function (number) {
-//            // 表示数値以外の引数だったらエラーとして何もしない
-//            if (0 < number && number < 10) {
-//                return number;
-//            }
-//        },
 
         // 全ての問題が終了したか
         finishQuest : function () {
-            if (this.currentquestnumebr >= ns.QUESTNUM - 1 + this.back) {
+            if (this.current_quest_number >= ns.QUESTNUM - 1 + this.back) {
                 return true;
             }
             return false;
@@ -193,7 +155,6 @@
             if (this.isClick() === false) {
                 return false;
             }
-
 
             // クリック位置取得
             var mouse_position = this.getClickPosition();
@@ -227,6 +188,34 @@
             return user_answer;
         },
 
+        // ボタンを全て明転する
+        changeButtonRight : function (scene, sprites) {
+            for (var i = 0; i < sprites.number_black.length; ++i) {
+                scene.removeChild(sprites.number_black[i]);
+            }
+            for (var i = 0; i < sprites.number.length; ++i) {
+                scene.removeChild(sprites.number[i]);
+            }
+
+            for (var i = 0; i < sprites.number.length; ++i) {
+                scene.addChild(sprites.number[i]);
+            }
+        },
+
+        // ボタンを全て暗転する
+        changeButtonDark : function (scene, sprites) {
+            for (var i = 0; i < sprites.number_black.length; ++i) {
+                scene.removeChild(sprites.number_black[i]);
+            }
+            for (var i = 0; i < sprites.number.length; ++i) {
+                scene.removeChild(sprites.number[i]);
+            }
+
+            for (var i = 0; i < sprites.number.length; ++i) {
+                scene.addChild(sprites.number_black[i]);
+            }
+        },
+
         // ユーザの入力を取得２
         getUserAnswer2 : function (sprite) {
             // クリックされていなかったら以下処理を行わない
@@ -253,7 +242,7 @@
         },
 
         // ゲームメイン処理
-        update : function () {
+        update : function (scene) {
 
             // 問題が全て終了したら
             if (this.finishQuest()) {
@@ -262,8 +251,12 @@
 
             // ユーザが覚える問題数目までゲームはスタートしない
             if (this.isStartGame()) {
-                // ユーザの入力箇所を取得
-                this.current_user_answer = this.getUserAnswer() || this.current_user_answer;
+                // ユーザの入力箇所をセット
+                this.setCurrentUserAnswer();
+
+                // 一度だけボタンを全て明転する(以降この処理は行われない)
+
+                this.once.run(true, this.changeButtonRight, scene, scene.sprite);
 
                 // 次の問題に以降する
                 if (this.isNextQuest()) {
@@ -275,11 +268,12 @@
 
                     // 前問で入力していた箇所をリセットする
                     this.current_user_answer = 0;
+                    this.past_user_answer = 0;
+
+                    // ボタンを全て明転する
+                    this.changeButtonRight(scene, scene.sprite);
                 }
             }
-
-
-
 
             // カウントアップ
             this.countUp();

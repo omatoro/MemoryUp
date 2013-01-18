@@ -15,11 +15,11 @@
         ns.app.background = "rgba(0, 0, 0, 0.1)"; // 背景色をセット
 
         // デバッグ時のみ
-        if (this.DEBUG === true) {
+        if (ns.DEBUG === true) {
             ns.app.enableStats();
         }
 
-        ns.app.replaceScene(this.SceneTitle());
+        ns.app.replaceScene(ns.SceneTitle());
 
         // タイトルシーンの生成
         var title = ns.SceneTitle();
@@ -28,7 +28,7 @@
         ns.app.replaceScene(title);
 
         // tmlibの実行
-        this.app.run();
+        ns.app.run();
 
     });
 
