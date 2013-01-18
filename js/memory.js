@@ -29,7 +29,7 @@
         sum_result : 0,
 
         // フレーム数のカウンタ
-        count : 0,
+        counter : {},
 
         // ゲームがスタートしたか
         flagStartGame : false,
@@ -53,14 +53,9 @@
             this.quest = ns.QuestNumber(ns.BACK_NUMBER);
 
             // カウンターの初期化
-            this.initCount();
+            this.counter = ns.Counter();
 
             this.once = ns.Once();
-        },
-
-        // カウンターの初期化
-        initCount : function () {
-            this.count = 0;
         },
 
         // クリックした場所の取得
@@ -74,23 +69,14 @@
             return ns.app.pointing.getPointingEnd();
         },
 
-        // カウントアップ
-        countUp : function () {
-            ++this.count;
-        },
-
-        getCount : function () {
-            return this.count;
-        },
-
         // 何問目を出題するかの計算(フレームから算出する)
         howManyQuest : function () {
-            return parseInt(this.getCount() / ns.NEXT_GAME_FRAME);
+            return parseInt(this.counter.get() / ns.NEXT_GAME_FRAME);
         },
 
         // 次の問題に以降してよいか判断する
         isNextQuest : function () {
-            if (this.getCount() % ns.NEXT_GAME_FRAME === 0) {
+            if (this.counter.get() % ns.NEXT_GAME_FRAME === 0) {
                 return true;
             }
             return false;
@@ -103,7 +89,7 @@
 
         // ゲームがスタートできるフレーム数に達したかを判断する
         isStartGame : function () {
-            if (this.getCount() > (this.back * ns.NEXT_GAME_FRAME)) {
+            if (this.counter.get() > (this.back * ns.NEXT_GAME_FRAME)) {
                 return true;
             }
             return false;
@@ -255,7 +241,6 @@
                 this.setCurrentUserAnswer();
 
                 // 一度だけボタンを全て明転する(以降この処理は行われない)
-
                 this.once.run(true, this.changeButtonRight, scene, scene.sprite);
 
                 // 次の問題に以降する
@@ -276,7 +261,7 @@
             }
 
             // カウントアップ
-            this.countUp();
+            this.counter.up();
 
             return false;
 
