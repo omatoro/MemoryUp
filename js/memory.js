@@ -31,9 +31,6 @@
         // フレーム数のカウンタ
         counter : {},
 
-        // ゲームがスタートしたか
-        flagStartGame : false,
-
         // 一度だけ実行できる関数を作る
         once : {},
 
@@ -101,14 +98,14 @@
         },
 
         // ユーザの現在の回答をゲット
-        setCurrentUserAnswer : function () {
+        setCurrentUserAnswer : function (sprite) {
             // クリックされていなかったら以下処理を行わない
             if (this.isClick() === false) {
                 return false;
             }
 
             this.past_user_answer    = this.current_user_answer;
-            this.current_user_answer = this.getUserAnswer() || this.current_user_answer;
+            this.current_user_answer = this.getUserAnswer(sprite) + 1 || this.current_user_answer;
 
             return true;
         },
@@ -135,44 +132,6 @@
             return false;
         },
 
-        // ユーザの入力を取得
-        getUserAnswer : function () {
-            // クリックされていなかったら以下処理を行わない
-            if (this.isClick() === false) {
-                return false;
-            }
-
-            // クリック位置取得
-            var mouse_position = this.getClickPosition();
-
-            // クリックした場所がボタンの場所でなかったら終了する
-            if (mouse_position.y < ns.BUTTON_Y) {
-                return false;
-            }
-
-            // ボタンのサイズ
-            var button_size = {
-                x : ns.SCREEN_WIDTH  / 3,
-                y : ns.SCREEN_WIDTH  / 3
-            };
-
-            var click_number_x = mouse_position.x                 / button_size.x | 0; // 横3列
-            var click_number_y = (mouse_position.y - ns.BUTTON_Y) / button_size.y | 0; // 縦3列
-
-            // どのボタンを押したのか判断する
-            var user_answer = 0;
-            if (click_number_x === 0 && click_number_y === 0) { user_answer = 1; }
-            if (click_number_x === 0 && click_number_y === 1) { user_answer = 2; }
-            if (click_number_x === 0 && click_number_y === 2) { user_answer = 3; }
-            if (click_number_x === 1 && click_number_y === 0) { user_answer = 4; }
-            if (click_number_x === 1 && click_number_y === 1) { user_answer = 5; }
-            if (click_number_x === 1 && click_number_y === 2) { user_answer = 6; }
-            if (click_number_x === 2 && click_number_y === 0) { user_answer = 7; }
-            if (click_number_x === 2 && click_number_y === 1) { user_answer = 8; }
-            if (click_number_x === 2 && click_number_y === 2) { user_answer = 9; }
-
-            return user_answer;
-        },
 
         // ボタンを全て明転する
         changeButtonRight : function (scene, sprites) {
@@ -202,8 +161,8 @@
             }
         },
 
-        // ユーザの入力を取得２
-        getUserAnswer2 : function (sprite) {
+        // ユーザの入力を取得(配列の添字を返すので、押下したボタンの数値とは一致しない)
+        getUserAnswer : function (sprite) {
             // クリックされていなかったら以下処理を行わない
             if (this.isClick() === false) {
                 return -1;
@@ -238,7 +197,7 @@
             // ユーザが覚える問題数目までゲームはスタートしない
             if (this.isStartGame()) {
                 // ユーザの入力箇所をセット
-                this.setCurrentUserAnswer();
+                this.setCurrentUserAnswer(scene.sprite);
 
                 // 一度だけボタンを全て明転する(以降この処理は行われない)
                 this.once.run(true, this.changeButtonRight, scene, scene.sprite);
@@ -264,8 +223,6 @@
             this.counter.up();
 
             return false;
-
-
         }
 
     });

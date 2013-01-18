@@ -68,7 +68,7 @@
 
 
             // ボタン画像の切り替え
-            var user_answer = this.memory.getUserAnswer2(this.sprite);
+            var user_answer = this.memory.getUserAnswer(this.sprite);
             var past_user_answer = this.memory.getPastUserAnswer();
             if (0 <= user_answer
             &&  user_answer < 10
