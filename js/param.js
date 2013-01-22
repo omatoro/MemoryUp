@@ -5,6 +5,9 @@ var game = game || {};
 
 (function(ns) {
 
+    // デバッグ時定数
+    ns.DEBUG = true;
+
     // スクリーンサイズ
     ns.SCREEN_WIDTH  = 640;
     ns.SCREEN_HEIGHT = 960;
