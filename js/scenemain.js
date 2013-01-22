@@ -60,7 +60,7 @@
         update : function() {
 
             if (this.memory.update(this)) {
-                ns.app.replaceScene(ns.SceneTitle());
+                ns.app.replaceScene(ns.SceneEnd());
             }
 
             // this.memory.drawQuest();
