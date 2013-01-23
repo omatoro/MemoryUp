@@ -22,12 +22,15 @@
         // 表示するスコア
         score : 0,
 
+        // タイトル移動へのボタン
+        title_button : {},
+
         init : function(score) {
             this.superInit();
-            this.score = score || 0;
-        },
 
-        update : function() {
+            // スコア初期化
+            this.score = score || 0;
+
             // スコア表示用のラベルの作成
             this.fromJSON(UI_DATA.LABELS);
             this.scoreLabel.text = this.score + " / 10 問正解！";
@@ -37,8 +40,12 @@
             title_button.setPosition(250, 500);
             title_button.label.text = "Title";
             this.addChild(title_button);
+            this.title_button = title_button;
+        },
 
-            title_button.onpointingstart = function () {
+        update : function() {
+
+            this.title_button.onpointingstart = function () {
                 ns.app.replaceScene(ns.SceneTitle());
             };
         }
