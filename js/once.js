@@ -7,7 +7,7 @@
         once_flag : true,
 
         run : function (flag, func) {
-            if (flag      === true
+            if (flag           === true
             &&  this.once_flag === true) {
                 var temp_arguments = [];
                 for (var i = 2; i < arguments.length; ++i) {

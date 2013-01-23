@@ -28,4 +28,7 @@ var game = game || {};
     // ? 仮組みで作ったものなので後で整理する
     ns.BUTTON_Y = 300;
 
+    // 次の問題へ以降するフレーム数
+    ns.NEXT_GAME_FRAME = 90;
+
 })(game);

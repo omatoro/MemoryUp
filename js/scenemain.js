@@ -72,14 +72,14 @@
 
 
             // ボタン画像の切り替え
-            var user_answer = this.memory.getUserAnswer(this.sprite);
+            var user_answer = this.memory.button.getUserAnswer(this.sprite);
             var past_user_answer = this.memory.getPastUserAnswer();
             if (0 <= user_answer
             &&  user_answer < 10
             &&  this.memory.isStartGame()) {
                 if (past_user_answer !== null
                 &&  past_user_answer !== 0) {
-                    this.memory.changeButtonRight(this, this.sprite);
+                    this.memory.button.changeBright(this, this.sprite);
                     this.addChild(this.sprite.number[past_user_answer-1]);
                 }
                 this.sprite.number[user_answer].remove();
