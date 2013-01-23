@@ -60,7 +60,11 @@
         update : function() {
 
             if (this.memory.update(this)) {
-                ns.app.replaceScene(ns.SceneEnd());
+                // ゲームが終了したのでスコアを計算する
+                var score = this.memory.getScore();
+
+                // スコアをエンドシーンで表示する
+                ns.app.replaceScene(ns.SceneEnd(score));
             }
 
             // this.memory.drawQuest();

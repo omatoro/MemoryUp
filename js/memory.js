@@ -186,6 +186,12 @@
             return -1;
         },
 
+        // スコア取得
+        getScore : function () {
+            return 0;
+        },
+
+
         // ゲームメイン処理
         update : function (scene) {
 
