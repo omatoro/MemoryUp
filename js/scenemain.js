@@ -46,7 +46,7 @@
             }
 
             // 問題を作成するクラスを作成
-            this.memory = ns.Memory(1);
+            this.memory = ns.Memory(ns.BACK_NUMBER);
 
             // 問題を表示するLabel
             this.drawedNum = tm.app.Label("", 50); // 生成

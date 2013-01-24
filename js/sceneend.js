@@ -38,7 +38,7 @@
             // ボタン作成
             var title_button = tm.app.iPhoneButton(200, 100, "#222222");
             title_button.setPosition(250, 500);
-            title_button.label.text = "Title";
+            title_button.label.text = "もっかい行っとく？";
             this.addChild(title_button);
             this.title_button = title_button;
         },

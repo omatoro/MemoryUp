@@ -19,11 +19,9 @@
 
         update : function() {
 
-            if (ns.app.keyboard.getKeyDown("Z")
-                    || ns.app.pointing.getPointingEnd()) {
+            if (ns.app.pointing.getPointingEnd()) {
                 ns.app.replaceScene(ns.SceneMain());
             }
-            console.log('Title');
         }
     });
 

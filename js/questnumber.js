@@ -38,6 +38,18 @@
 
             // error
             return null;
+        },
+
+        // 正解数を返す
+        getScore : function (user_answers) {
+            var result = 0;
+            for (var i = 0; i < user_answers.length; ++i) {
+                if (this.number[i] === user_answers[i]) {
+                    ++result;
+                }
+            }
+
+            return result;
         }
     });
 

@@ -41,7 +41,7 @@
             this.back = _back || 1;
 
             // テキスト
-            this.drawedNum = tm.app.Label("asdasdfasdfasdff"); // 生成
+            this.drawedNum = tm.app.Label("dammy"); // 生成
             this.drawedNum.x = 25; // X軸
             this.drawedNum.y = 50; // Y軸
             this.drawedNum.width = 200; // 幅
@@ -53,10 +53,14 @@
             // カウンターの初期化
             this.counter = ns.Counter();
 
+            // 一度だけ行える処理を作るクラスの作成
             this.once = ns.Once();
 
             // ボタン処理作成
             this.button = ns.ButtonNumber();
+
+            //
+            this.user_answer = [];
         },
 
         // 何問目を出題するかの計算(フレームから算出する)
@@ -111,26 +115,20 @@
         // 次の問題へ移行する
         nextQuest : function () {
             ++this.current_quest_number;
-
-            // 過去入力分の暗転画像を元に戻す
-            // @todo past_user_answer
         },
-
 
         // 全ての問題が終了したか
         finishQuest : function () {
-            if (this.current_quest_number >= ns.QUESTNUM - 1 + this.back) {
+            if (this.current_quest_number >= ns.QUESTNUM) {
                 return true;
             }
             return false;
         },
 
-
         // スコア取得
         getScore : function () {
-            return 0;
+            return this.quest.getScore(this.user_answer);
         },
-
 
         // ゲームメイン処理
         update : function (scene) {
