@@ -16,13 +16,8 @@
             ns.app.enableStats();
         }
 
-        ns.app.replaceScene(ns.SceneTitle());
-
-        // タイトルシーンの生成
-        var title = ns.SceneTitle();
-
         // シーンの切り替え
-        ns.app.replaceScene(title);
+        ns.app.replaceScene(ns.TitleScene());
 
         // tmlibの実行
         ns.app.run();

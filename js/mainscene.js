@@ -3,7 +3,7 @@
  */
 (function(ns) {
 
-    ns.SceneMain = tm.createClass({
+    ns.MainScene = tm.createClass({
 
         superClass : tm.app.Scene,
 
@@ -55,6 +55,31 @@
             this.drawedNum.width = 200; // 幅
             this.addChild(this.drawedNum); // シーンに追加
 
+            var a = tm.createClass({
+
+                superClass : tm.app.Scene,
+
+                init : function() {
+                    this.superInit();
+                },
+
+                xxx:50,
+            });
+
+            console.dir(a());
+
+            var b = tm.createClass({
+
+                xxx:50,
+            });
+
+            console.dir(b());
+
+            var func = function () {};
+            console.dir(new func);
+
+            console.dir(func);
+
         },
 
         update : function() {
@@ -64,7 +89,7 @@
                 var score = this.memory.getScore();
 
                 // スコアをエンドシーンで表示する
-                ns.app.replaceScene(ns.SceneEnd(score));
+                ns.app.replaceScene(ns.EndScene(score));
             }
 
             // this.memory.drawQuest();

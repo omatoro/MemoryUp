@@ -3,7 +3,7 @@
  */
 (function(ns) {
 
-    ns.SceneTitle = tm.createClass({
+    ns.TitleScene = tm.createClass({
 
         superClass : tm.app.TitleScene,
 
@@ -20,7 +20,7 @@
         update : function() {
 
             if (ns.app.pointing.getPointingEnd()) {
-                ns.app.replaceScene(ns.SceneMain());
+                ns.app.replaceScene(ns.MainScene());
             }
         }
     });
