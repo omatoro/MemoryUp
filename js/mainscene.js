@@ -3,6 +3,33 @@
  */
 (function(ns) {
 
+    // 画像リスト
+	var IMAGES = {
+		bright: {
+			"num1": { "image": "num1", "rect": [                     0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X +                      0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 0 },
+			"num2": { "image": "num2", "rect": [(ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X +                      0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 1 },
+			"num3": { "image": "num3", "rect": [(ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X +                      0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 2 },
+			"num4": { "image": "num4", "rect": [                     0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 3 },
+			"num5": { "image": "num5", "rect": [(ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 4 },
+			"num6": { "image": "num6", "rect": [(ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 5 },
+			"num7": { "image": "num7", "rect": [                     0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 6 },
+			"num8": { "image": "num8", "rect": [(ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 7 },
+			"num9": { "image": "num9", "rect": [(ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 8 },
+		},
+
+		dark: {
+			"num_black1": { "image": "num_black1", "rect": [                     0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X +                      0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 0 },
+			"num_black2": { "image": "num_black2", "rect": [(ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X +                      0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 1 },
+			"num_black3": { "image": "num_black3", "rect": [(ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X +                      0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 2 },
+			"num_black4": { "image": "num_black4", "rect": [                     0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 3 },
+			"num_black5": { "image": "num_black5", "rect": [(ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 4 },
+			"num_black6": { "image": "num_black6", "rect": [(ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 5 },
+			"num_black7": { "image": "num_black7", "rect": [                     0 + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 6 },
+			"num_black8": { "image": "num_black8", "rect": [(ns.BUTTON_SIZE_X)     + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 7 },
+			"num_black9": { "image": "num_black9", "rect": [(ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_START_DRAW_X + (ns.BUTTON_SIZE_X * 2) + (ns.BUTTON_SIZE_X / 2), ns.BUTTON_SIZE_X, ns.BUTTON_SIZE_Y], num: 8 }
+		}
+	};
+
     ns.MainScene = tm.createClass({
 
         superClass : tm.app.Scene,
@@ -16,33 +43,25 @@
 
             this.superInit();
 
-            // 画像の読み込み
-            for (var i = 0; i < 9; ++i) {
-                // ボタン画像のロード 最後に配列に入れた方が高速＆シンプル
-                // (描画しないのでaddChildは行わない)
-                var sprite = tm.app.Sprite(
-                        ns.BUTTON_SIZE_X,
-                        ns.BUTTON_SIZE_Y,
-                        tm.graphics.TextureManager.get("num" + (i + 1)));
-                sprite.setPosition(
-                        (i % 3)         * ns.BUTTON_SIZE_X + (ns.BUTTON_SIZE_X / 2),
-                        parseInt(i / 3) * ns.BUTTON_SIZE_Y + (ns.BUTTON_SIZE_Y / 2) + ns.BUTTON_START_DRAW_X);
-                sprite.speed = 0;  // 移動量を設定
-                //this.addChild(sprite);
-                this.sprite["number"][i] = sprite;
-
-                // 暗転時ボタン画像のロード
-                // ボタン暗転時の画像のロード
-                sprite = tm.app.Sprite(
-                        ns.BUTTON_SIZE_X,
-                        ns.BUTTON_SIZE_Y,
-                        tm.graphics.TextureManager.get("num_black" + (i + 1)));
-                sprite.setPosition(
-                        (i % 3)         * ns.BUTTON_SIZE_X + (ns.BUTTON_SIZE_X / 2),
-                        parseInt(i / 3) * ns.BUTTON_SIZE_Y + (ns.BUTTON_SIZE_Y / 2) + ns.BUTTON_START_DRAW_X);
-                sprite.speed = 0;  // 移動量を設定
-                this.addChild(sprite);
-                this.sprite["number_black"][i] = sprite;
+            // 画像読み込み
+            this.sprite = {
+        		number : [],
+                number_black : []
+            };
+            for (var key in IMAGES.bright) {
+            	var value = IMAGES.bright[key];
+            	var sprite = tm.app.Sprite(value.rect[2], value.rect[3], value.image);
+            	sprite.setPosition(value.rect[0], value.rect[1]);
+            	sprite.speed = 0;
+            	this.sprite["number"][value.num] = sprite;
+            }
+            for (var key in IMAGES.dark) {
+            	var value = IMAGES.dark[key];
+            	var sprite = tm.app.Sprite(value.rect[2], value.rect[3], value.image);
+            	sprite.setPosition(value.rect[0], value.rect[1]);
+            	sprite.speed = 0;
+            	this.addChild(sprite);
+            	this.sprite["number_black"][value.num] = sprite;
             }
 
             // 問題を作成するクラスを作成
@@ -54,32 +73,6 @@
             this.drawedNum.y = 100; // Y軸
             this.drawedNum.width = 200; // 幅
             this.addChild(this.drawedNum); // シーンに追加
-
-            var a = tm.createClass({
-
-                superClass : tm.app.Scene,
-
-                init : function() {
-                    this.superInit();
-                },
-
-                xxx:50,
-            });
-
-            console.dir(a());
-
-            var b = tm.createClass({
-
-                xxx:50,
-            });
-
-            console.dir(b());
-
-            var func = function () {};
-            console.dir(new func);
-
-            console.dir(func);
-
         },
 
         update : function() {
