@@ -6,7 +6,7 @@ var game = game || {};
 (function(ns) {
 
     // デバッグ時定数
-    ns.DEBUG = true;
+    ns.DEBUG = false;
 
     // スクリーンサイズ
     ns.SCREEN_WIDTH  = 640;

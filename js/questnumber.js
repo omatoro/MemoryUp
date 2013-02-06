@@ -11,7 +11,7 @@
         init : function (_back) {
 
             for ( var i = 0; i < _back + ns.QUESTNUM; ++i) {
-                this.number[i] = tm.util.Random.randint(0, 9);
+                this.number[i] = tm.util.Random.randint(1, 9);
             }
 
             // 何個目の問題を表示するか
