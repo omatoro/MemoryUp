@@ -48,20 +48,33 @@
         		number : [],
                 number_black : []
             };
+
+            // タイマーの生成
+            var timer = ns.ProgressBar();
+            timer.setPosition(ns.SCREEN_WIDTH / 2, ns.BUTTON_START_DRAW_X - 70);
+            timer.setBarLength(0);
+            this.timer = timer;
+            this.addChild(timer);
+
+            // ボタンの生成
+            var i = 0;
             for (var key in IMAGES.bright) {
             	var value = IMAGES.bright[key];
-            	var sprite = tm.app.Sprite(value.rect[2], value.rect[3], value.image);
+            	var sprite = tm.app.iPhoneButton(value.rect[2], value.rect[3], "gray");
             	sprite.setPosition(value.rect[0], value.rect[1]);
-            	sprite.speed = 0;
+            	sprite.label.text = ++i;
+            	sprite.label.fontSize = 64;
             	this.sprite["number"][value.num] = sprite;
             }
+            i = 0;
             for (var key in IMAGES.dark) {
             	var value = IMAGES.dark[key];
-            	var sprite = tm.app.Sprite(value.rect[2], value.rect[3], value.image);
+            	var sprite = tm.app.iPhoneButton(value.rect[2], value.rect[3], "black");
             	sprite.setPosition(value.rect[0], value.rect[1]);
-            	sprite.speed = 0;
-            	this.addChild(sprite);
+            	sprite.label.text = ++i;
+            	sprite.label.fontSize = 64;
             	this.sprite["number_black"][value.num] = sprite;
+            	this.addChild(sprite);
             }
 
             // 問題を作成するクラスを作成

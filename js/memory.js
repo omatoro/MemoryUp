@@ -160,6 +160,9 @@
 
                     // ボタンを全て明転する
                     this.button.changeBright(scene, scene.sprite);
+
+                    // タイマーをリセット
+//                    this.timer.
                 }
             }
 

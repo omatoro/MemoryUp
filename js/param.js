@@ -16,7 +16,7 @@ var game = game || {};
     ns.BUTTON_SIZE_X = 213;
     ns.BUTTON_SIZE_Y = 213;
 
-    // ボタンの描画位置
+    // ボタンの描画開始位置
     ns.BUTTON_START_DRAW_X = 320;
 
     // 問題数
