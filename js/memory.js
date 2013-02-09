@@ -143,6 +143,9 @@
                 // ユーザの入力箇所をセット
                 this.setCurrentUserAnswer(scene.sprite);
 
+                // タイマーをカウントダウンする
+                scene.timer.countDown();
+
                 // 一度だけボタンを全て明転する(以降この処理は行われない)
                 this.once.run(true, this.button.changeBright, scene, scene.sprite);
 
@@ -162,7 +165,7 @@
                     this.button.changeBright(scene, scene.sprite);
 
                     // タイマーをリセット
-//                    this.timer.
+                    scene.timer.reset();
                 }
             }
 

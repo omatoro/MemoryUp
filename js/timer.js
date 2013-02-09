@@ -8,36 +8,21 @@
 
     	init: function (width, height, barColor, backgroundColor) {
     		this.superInit(width, height, barColor, backgroundColor);
-    		this.time = 100;
+    		this.time = ns.NEXT_GAME_FRAME;
+    		this.timeUnit = 100 / ns.NEXT_GAME_FRAME;
     	},
 
         update : function () {
-//            if (this.plus > 0) {
-//            	this.plus  -= this.plusTmp;
-//            	this.width += this.plusTmp;
-//            	if (this.width >= ns.app.width) {
-//            		this.width = app.width;
-//            	}
-//            }
-//            else {
-//            	this.width -= this.timerSpeed;
-//            	++userData.time;
-//            	--gameData.time;
-//            }
+        	this.setBarLength(this.time * this.timeUnit);
+        	return this.time;
         },
 
-//        draw: function (canvas) {
-//        	canvas.fillStyle = this.color;
-//        	canvas.fillRect(this.x, this.y, this.width, 30);
-//        },
+        countDown : function () {
+        	--this.time;
+        },
 
-        plusTime: function (plus) {
-//        	this.plus = plus * this.timerSpeed;
-//        	this.plusTmp = this.plus / effectTime;
-//        	gameData.tim += plus;
-//        	if (gameData.time >= gameData.maxTime) {
-//        		gameData.time = gameData.maxTime;
-//        	}
+        reset : function () {
+        	this.time = ns.NEXT_GAME_FRAME;
         }
     });
 

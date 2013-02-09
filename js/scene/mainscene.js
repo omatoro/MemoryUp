@@ -50,7 +50,7 @@
             };
 
             // タイマーの生成
-            var timer = ns.ProgressBar();
+            var timer = ns.Timer();
             timer.setPosition(ns.SCREEN_WIDTH / 2, ns.BUTTON_START_DRAW_X - 70);
             timer.setBarLength(0);
             this.timer = timer;
@@ -98,9 +98,7 @@
                 ns.app.replaceScene(ns.EndScene(score));
             }
 
-            // this.memory.drawQuest();
             this.memory.drawQuest(this.drawedNum);
-
 
             // ボタン画像の切り替え
             var user_answer = this.memory.button.getUserAnswer(this.sprite);
