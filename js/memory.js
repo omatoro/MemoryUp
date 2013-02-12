@@ -5,36 +5,6 @@
 
     ns.Memory = tm.createClass({
 
-        // 何問前の回答を答えるか
-        back : 0,
-
-        // 問題のスタック
-        quest : {},
-
-        // 現在の問題数目
-        current_quest_number : 0,
-
-        // 現在のユーザの回答番号
-        current_user_answer : 0,
-
-        // 一つ前のユーザ回答番号
-        past_user_answer : 0,
-
-        // ユーザの回答履歴
-        user_answer : [],
-
-        // 正解数
-        sum_result : 0,
-
-        // フレーム数のカウンタ
-        counter : {},
-
-        // ボタンの操作
-        button : {},
-
-        // 一度だけ実行できる関数を作る
-        once : {},
-
         init : function(_back) {
 
             // 何問前の回答を答えるか
@@ -59,8 +29,17 @@
             // ボタン処理作成
             this.button = ns.ButtonNumber();
 
-            //
+            // ユーザの回答履歴
             this.user_answer = [];
+
+            // 一つ前のユーザ回答番号
+            this.past_user_answer = 0;
+
+            // 現在のユーザの回答番号
+            this.current_user_answer = 0;
+
+            // 現在の問題数目
+            this.current_quest_number = 0;
         },
 
         // 何問目を出題するかの計算(フレームから算出する)

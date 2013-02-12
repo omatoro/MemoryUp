@@ -14,7 +14,6 @@
 
         update : function () {
         	this.setBarLength(this.time * this.timeUnit);
-        	return this.time;
         },
 
         countDown : function () {
