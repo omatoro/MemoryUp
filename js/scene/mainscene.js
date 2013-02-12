@@ -55,7 +55,7 @@
             this.memory = ns.Memory(ns.BACK_NUMBER);
 
             // 問題を表示するLabel
-            this.drawedNum = tm.app.Label("", 50); // 生成
+            this.drawedNum = tm.app.Label(" ", 50); // 生成
             this.drawedNum.x = ns.SCREEN_WIDTH / 2; // X軸
             this.drawedNum.y = 100; // Y軸
             this.drawedNum.width = 200; // 幅

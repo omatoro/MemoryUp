@@ -25,6 +25,18 @@
                 func.apply(null, temp_arguments);
                 this.once_flag = false;
             }
+        },
+
+        call : function (flag, funcThis, func) {
+            if (flag           === true
+            &&  this.once_flag === true) {
+                var temp_arguments = [];
+                for (var i = 2; i < arguments.length; ++i) {
+                    temp_arguments[i - 2] = arguments[i];
+                }
+                func.apply(funcThis, temp_arguments);
+                this.once_flag = false;
+            }
         }
     });
 
