@@ -57,7 +57,7 @@
             // 問題を表示するLabel
             this.drawedNum = tm.app.Label(" ", 50); // 生成
             this.drawedNum.x = ns.SCREEN_WIDTH / 2; // X軸
-            this.drawedNum.y = 100; // Y軸
+            this.drawedNum.y = 130; // Y軸
             this.drawedNum.width = 200; // 幅
             this.addChild(this.drawedNum); // シーンに追加
         },
