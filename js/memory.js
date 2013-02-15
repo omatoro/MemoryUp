@@ -57,7 +57,7 @@
 
         // 問題を表示
         drawQuest : function(label) {
-            label.text = this.quest.getQuest(this.howManyQuest());
+            label.text = this.quest.getQuest(this.howManyQuest()) || " ";
 
             // 数字を切り替える際にフェードアウトする
             var alpha = 1.0 - (this.counter.get() % ns.NEXT_GAME_FRAME / (ns.NEXT_GAME_FRAME*2));
@@ -73,8 +73,6 @@
             // スケールを変更すると文字描画位置がずれるので調整
             label.x = ns.SCREEN_WIDTH / 2 - alpha * 25;
             label.y = 130 - alpha * 0;
-            //sprite_bright.setPosition(image_position_x, image_position_y);
-
         },
 
         // ゲームがスタートできるフレーム数に達したかを判断する
