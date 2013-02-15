@@ -26,9 +26,6 @@
             // 一度だけ行える処理を作るクラスの作成
             this.once = ns.Once();
 
-            // ボタン処理作成
-            this.button = ns.ButtonNumber();
-
             // ユーザの回答履歴
             this.user_answer = [];
 
@@ -89,22 +86,18 @@
         },
 
         // ユーザの現在の回答をゲット
-        setCurrentUserAnswer : function (sprite) {
+        setCurrentUserAnswer : function (buttons) {
             // クリックされていなかったら以下処理を行わない
-            if (this.button.isClick() === false) {
+            if (ns.app.pointing.getPointingEnd() === false) {
                 return false;
             }
 
             this.past_user_answer    = this.current_user_answer;
-            this.current_user_answer = this.button.getUserAnswer(sprite) + 1 || this.current_user_answer;
+            this.current_user_answer = buttons.getUserAnswer() + 1 || this.current_user_answer;
 
             return true;
         },
 
-        // ユーザの過去の回答をゲット
-        getPastUserAnswer : function () {
-            return this.past_user_answer;
-        },
 
         // 次の問題へ移行する
         nextQuest : function () {
@@ -135,13 +128,13 @@
             // ユーザが覚える問題数目までゲームはスタートしない
             if (this.isStartGame()) {
                 // ユーザの入力箇所をセット
-                this.setCurrentUserAnswer(scene.sprite);
+                this.setCurrentUserAnswer(scene.buttons);
 
                 // タイマーをカウントダウンする
                 scene.timer.countDown();
 
                 // 一度だけボタンを全て明転する(以降この処理は行われない)
-                this.once.run(true, this.button.changeBright, scene, scene.sprite);
+                this.once.call(true, scene.buttons, scene.buttons.changeBright);
 
                 // 次の問題に以降する
                 if (this.isNextQuest()) {
@@ -156,7 +149,7 @@
                     this.past_user_answer = 0;
 
                     // ボタンを全て明転する
-                    this.button.changeBright(scene, scene.sprite);
+                    scene.buttons.changeBright();
 
                     // タイマーをリセット
                     scene.timer.reset();
