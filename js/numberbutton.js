@@ -23,17 +23,22 @@
 
             // 現在の背景色
             this.currentColor = "rgb(80,20,20)";
+
+            // フェードイン、アウトを行わないようにする
+            this.sleep();
         },
 
         clear : function () {
         	if (this.currentColor !== "gray") {
         		this.setBackgroundColor("grey");
+        		this.currentColor = "gray";
         	}
         },
 
         sellect : function () {
         	if (this.currentColor !== "black") {
         		this.setBackgroundColor("black");
+        		this.currentColor = "black";
         	}
         },
     });
