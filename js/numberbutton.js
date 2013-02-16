@@ -20,14 +20,21 @@
             this.addEventListener("pointingout", function() {
             	//this.setBackgroundColor("black");
             });
+
+            // 現在の背景色
+            this.currentColor = "rgb(80,20,20)";
         },
 
         clear : function () {
-        	this.setBackgroundColor("grey");
+        	if (this.currentColor !== "gray") {
+        		this.setBackgroundColor("grey");
+        	}
         },
 
         sellect : function () {
-        	this.setBackgroundColor("black");
+        	if (this.currentColor !== "black") {
+        		this.setBackgroundColor("black");
+        	}
         },
     });
 
