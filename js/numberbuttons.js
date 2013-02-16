@@ -19,7 +19,9 @@
             	this.sprite[i] = sprite;
             	scene.addChild(sprite);
             }
-            console.dir(this.sprite);
+
+            // ボタンをゲーム開始時に一度だけ初期化する
+            this.once = ns.Once();
         },
 
         // ユーザの入力を取得(配列の添字を返すので、押下したボタンの数値とは一致しない)
@@ -50,7 +52,17 @@
             }
         },
 
+        // ボタンを起こす
+        wakeUpButtons : function () {
+        	for (var i = 0; i < 9; ++i) {
+        		this.sprite[i].wakeUp();
+        	}
+        },
+
         update : function () {
+        	// フェードイン、アウトするようボタンを起こす
+        	this.once.call(true, this, this.wakeUpButtons);
+
             // ボタンの切り替え
             var user_answer = this.getUserAnswer(this.sprite);
             if (0 <= user_answer
