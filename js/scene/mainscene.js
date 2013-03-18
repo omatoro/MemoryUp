@@ -6,21 +6,30 @@
     ns.MainScene = tm.createClass({
         superClass : tm.app.Scene,
 
-        init : function() {
+        init : function(backNum, gameSpeed) {
             this.superInit();
 
+            // ゲームスピード
+            if      (gameSpeed === 0) { gameSpeed = 60; }
+            else if (gameSpeed === 1) { gameSpeed = 30; }
+            else if (gameSpeed === 2) { gameSpeed = 20; }
+            this.gameSpeed = gameSpeed;
+
             // タイマーの生成
-            var timer = ns.Timer();
+            var timer = ns.Timer(this.gameSpeed);
             timer.setPosition(ns.SCREEN_WIDTH / 2, ns.BUTTON_START_DRAW_X - 70);
             timer.setBarLength(0);
             this.timer = timer;
             this.addChild(timer);
 
             // ボタンの生成
-            this.buttons = ns.NumberButtons(this);
+            this.buttons = ns.FactoryNumberButtons(this);
+
+            // バック数(引数の値は0からカウントされているので+1する)
+            this.backNum = backNum + 1;
 
             // 問題を作成するクラスを作成
-            this.memory = ns.Memory(ns.BACK_NUMBER);
+            this.memory = ns.Memory(this.backNum, this.gameSpeed);
 
             // 問題を表示するLabel
             this.drawedNum = tm.app.Label(" ", 50); // 生成
@@ -36,7 +45,7 @@
                 var score = this.memory.getScore();
 
                 // スコアをエンドシーンで表示する
-                ns.app.replaceScene(ns.EndScene(score));
+                ns.app.replaceScene(ns.EndScene(score, this.backNum));
             }
 
             this.memory.drawQuest(this.drawedNum);

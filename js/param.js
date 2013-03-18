@@ -6,7 +6,7 @@ var game = game || {};
 (function(ns) {
 
     // デバッグ時定数
-    ns.DEBUG = true;
+    ns.DEBUG = false;
 
     // スクリーンサイズ
     ns.SCREEN_WIDTH  = 640;
@@ -23,12 +23,12 @@ var game = game || {};
     ns.QUESTNUM = 10;
 
     // 何問前の答えを答えるか
-    ns.BACK_NUMBER = 2;
+    // ns.BACK_NUMBER = 2;
 
     // ? 仮組みで作ったものなので後で整理する
     ns.BUTTON_Y = 300;
 
     // 次の問題へ以降するフレーム数
-    ns.NEXT_GAME_FRAME = 90;
+    // ns.NEXT_GAME_FRAME = 90;
 
 })(game);

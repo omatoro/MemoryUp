@@ -1,9 +1,15 @@
 /**
- * ボタン一つのクラス
+ * n-backのback数を設定するボタンを生成する
  */
 (function(ns) {
 
-    ns.NumberButtons = tm.createClass({
+    var DRAW_Y = 100;
+    var BUTTON_POS_X = ns.BUTTON_SIZE_X;
+    var BUTTON_POS_Y = ~~(ns.BUTTON_SIZE_Y/2);
+    var BUTTON_SIZE_X = ~~(ns.BUTTON_SIZE_X/1.2);
+    var BUTTON_SIZE_Y = ~~(ns.BUTTON_SIZE_Y/3);
+
+    ns.FactorySettingBackNumbers = tm.createClass({
 
         init : function(scene) {
 
@@ -11,17 +17,20 @@
         	this.sprite = [];
             for (var i = 0; i < 9; ++i) {
             	// ボタンの表示位置を計算
-            	var image_position_x = ~~(i % 3) * ns.BUTTON_SIZE_X + (ns.BUTTON_SIZE_X / 2);
-            	var image_position_y = ~~(i / 3) * ns.BUTTON_SIZE_Y + (ns.BUTTON_SIZE_Y / 2) + ns.BUTTON_START_DRAW_X;
+            	var image_position_x = ~~(i % 3) * BUTTON_POS_X + (BUTTON_POS_X / 2);
+            	var image_position_y = ~~(i / 3) * BUTTON_POS_Y + (BUTTON_POS_Y / 2) + DRAW_Y;
 
             	// ボタン
-            	var sprite = ns.NumberButton(i+1, ns.BUTTON_SIZE_X, image_position_x, image_position_y);
+            	var sprite = ns.NumberButton(i+1, BUTTON_SIZE_X, BUTTON_SIZE_Y, image_position_x, image_position_y);
             	this.sprite[i] = sprite;
             	scene.addChild(sprite);
             }
 
             // ボタンをゲーム開始時に一度だけ初期化する
-            this.once = ns.Once();
+            //this.once = ns.Once();
+            this.wakeUpButtons();
+            this.changeBright();
+            this.sprite[0].sellect();
         },
 
         // ユーザの入力を取得(配列の添字を返すので、押下したボタンの数値とは一致しない)
@@ -61,7 +70,7 @@
 
         update : function () {
         	// フェードイン、アウトするようボタンを起こす
-        	this.once.call(true, this, this.wakeUpButtons);
+        	//this.once.call(true, this, this.wakeUpButtons);
 
             // ボタンの切り替え
             var user_answer = this.getUserAnswer(this.sprite);

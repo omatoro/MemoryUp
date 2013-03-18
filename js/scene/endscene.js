@@ -35,9 +35,9 @@
         // タイトル移動へのボタン
         title_button : {},
 
-        init : function(score) {
+        init : function(score, backNum) {
             // スコア初期化
-            RESULT_PARAM.score = score + " / 10 問正解！";
+            RESULT_PARAM.score = "バック数：" + backNum + " " + score + " / 10 問正解！";
             this.superInit(RESULT_PARAM);
         },
 
@@ -47,7 +47,7 @@
         // Backボタンを押したら、onpointingstart->インスタンス.dispatchEventにより
         // 以下onnextsceneイベントが実行される
         onnextscene : function () {
-            ns.app.replaceScene(ns.TitleScene());
+            ns.app.replaceScene(ns.OpeningScene());
         },
     });
 

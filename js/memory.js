@@ -5,10 +5,13 @@
 
     ns.Memory = tm.createClass({
 
-        init : function(_back) {
+        init : function(backNumber, gameSpeed) {
 
             // 何問前の回答を答えるか
-            this.back = _back || 1;
+            this.back = backNumber || 1;
+
+            // ゲームが進むフレーム数
+            this.gameSpeed = gameSpeed;
 
             // テキスト
             this.drawedNum = tm.app.Label("dammy"); // 生成
@@ -18,7 +21,7 @@
             ns.app.currentScene.addChild(this.drawedNum); // シーンに追加
 
             // 問題を管理するクラスの生成
-            this.quest = ns.QuestNumber(ns.BACK_NUMBER);
+            this.quest = ns.QuestNumber(this.back);
 
             // カウンターの初期化
             this.counter = ns.Counter();
@@ -41,12 +44,12 @@
 
         // 何問目を出題するかの計算(フレームから算出する)
         howManyQuest : function () {
-            return parseInt(this.counter.get() / ns.NEXT_GAME_FRAME);
+            return parseInt(this.counter.get() / this.gameSpeed);
         },
 
         // 次の問題に以降してよいか判断する
         isNextQuest : function () {
-            if (this.counter.get() % ns.NEXT_GAME_FRAME === 0) {
+            if (this.counter.get() % this.gameSpeed === 0) {
                 return true;
             }
             return false;
@@ -57,8 +60,8 @@
             label.text = this.quest.getQuest(this.howManyQuest()) || " ";
 
             // 数字を切り替える際にフェードアウトする
-            var alpha = 1.0 - (this.counter.get() % ns.NEXT_GAME_FRAME / (ns.NEXT_GAME_FRAME*2));
-            if (this.counter.get() % ns.NEXT_GAME_FRAME === 0) {
+            var alpha = 1.0 - (this.counter.get() % this.gameSpeed / (this.gameSpeed*2));
+            if (this.counter.get() % this.gameSpeed === 0) {
             	alpha = 1.0;
             }
             label.fillStyle = "rgba(255, 255, 255," + alpha + ")";
@@ -74,7 +77,7 @@
 
         // ゲームがスタートできるフレーム数に達したかを判断する
         isStartGame : function () {
-            if (this.counter.get() > (this.back * ns.NEXT_GAME_FRAME)) {
+            if (this.counter.get() > (this.back * this.gameSpeed)) {
                 return true;
             }
             return false;
@@ -152,7 +155,7 @@
                     scene.buttons.changeBright();
 
                     // タイマーをリセット
-                    scene.timer.reset();
+                    scene.timer.reset(this.gameSpeed);
                 }
             }
 

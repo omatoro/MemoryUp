@@ -7,8 +7,8 @@
 
         superClass : tm.app.iPhoneButton,
 
-        init : function(number, buttonSize, positionX, positionY) {
-            this.superInit(buttonSize, buttonSize, "rgb(80,20,20)", number);
+        init : function(number, buttonSizeX, buttonSizeY, positionX, positionY) {
+            this.superInit(buttonSizeX, buttonSizeY, "rgb(80,20,20)", number);
             this.setPosition(positionX, positionY);
             this.label.fontSize = 64;
             this.label.fillStyle = "rgb(170,40,40)";

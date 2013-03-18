@@ -6,10 +6,10 @@
     ns.Timer = tm.createClass({
     	superClass: ns.ProgressBar,
 
-    	init: function (width, height, barColor, backgroundColor) {
+    	init: function (time, width, height, barColor, backgroundColor) {
     		this.superInit(width, height, barColor, backgroundColor);
-    		this.time = ns.NEXT_GAME_FRAME;
-    		this.timeUnit = 100 / ns.NEXT_GAME_FRAME;
+    		this.time = time;
+    		this.timeUnit = 100 / time;
     	},
 
         update : function () {
@@ -20,8 +20,8 @@
         	--this.time;
         },
 
-        reset : function () {
-        	this.time = ns.NEXT_GAME_FRAME;
+        reset : function (time) {
+        	this.time = time;
         }
     });
 
