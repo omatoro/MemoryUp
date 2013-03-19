@@ -56,6 +56,14 @@
             return null;
         },
 
+        // 選択したボタン名を取得
+        getUserAnswerName : function () {
+            if (this.getUserAnswer() === null) {
+                return null;
+            }
+            return BUTTON_STRING[this.getUserAnswer()];
+        },
+
         // ボタンを全て明転する
         changeBright : function () {
             for (var i = 0; i < this.sprite.length; ++i) {

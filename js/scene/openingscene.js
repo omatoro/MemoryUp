@@ -43,6 +43,7 @@
             // セッティングデータ
             this.currentSettingBackNumber = 0;
             this.currentSettingSpeed = 0;
+            this.currentSettingSpeedName = " ";
 
             // ゲーム開始ボタン
             var startGameButton = tm.app.iPhoneButton(ns.SCREEN_WIDTH-40, 120, "blue", "ゲーム開始");
@@ -63,7 +64,8 @@
             if (backNumber !== null) { this.currentSettingBackNumber = backNumber; }
 
             var speed = this.settingSpeed.getUserAnswer();
-            if (speed !== null) { this.currentSettingSpeed = speed; }
+            var speedName = this.settingSpeed.getUserAnswerName();
+            if (speed !== null) { this.currentSettingSpeed = speed; this.currentSettingSpeedName = speedName; }
 
             // ゲーム開始ボタンが押されたらゲーム開始
             if (ns.app.pointing.getPointingEnd()) {
@@ -71,7 +73,7 @@
                 var mouse_position = ns.app.pointing;
 
                 if (this.startGameButton.isHitPoint(mouse_position.x, mouse_position.y)) {
-                    ns.app.replaceScene(ns.MainScene(this.currentSettingBackNumber, this.currentSettingSpeed));
+                    ns.app.replaceScene(ns.MainScene(this.currentSettingBackNumber, this.currentSettingSpeed, this.currentSettingSpeedName));
                 }
             }
         }

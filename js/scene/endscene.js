@@ -35,9 +35,9 @@
         // タイトル移動へのボタン
         title_button : {},
 
-        init : function(score, backNum) {
+        init : function(score, backNum, speed) {
             // スコア初期化
-            RESULT_PARAM.score = "バック数：" + backNum + " " + score + " / 10 問正解！";
+            RESULT_PARAM.score = speed + " " + backNum + "バック" + " " + score + " / 10 問正解！";
             this.superInit(RESULT_PARAM);
         },
 

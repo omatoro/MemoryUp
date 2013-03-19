@@ -6,8 +6,11 @@
     ns.MainScene = tm.createClass({
         superClass : tm.app.Scene,
 
-        init : function(backNum, gameSpeed) {
+        init : function(backNum, gameSpeed, gameSpeedName) {
             this.superInit();
+
+            // スピードの名称を保持
+            this.gameSpeedName = gameSpeedName;
 
             // ゲームスピード
             if      (gameSpeed === 0) { gameSpeed = 60; }
@@ -45,7 +48,7 @@
                 var score = this.memory.getScore();
 
                 // スコアをエンドシーンで表示する
-                ns.app.replaceScene(ns.EndScene(score, this.backNum));
+                ns.app.replaceScene(ns.EndScene(score, this.backNum, this.gameSpeedName));
             }
 
             this.memory.drawQuest(this.drawedNum);

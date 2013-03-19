@@ -112,7 +112,6 @@
         drawQuest : function(label) {
             // 問題表示中のカウントアップ処理
             this.oneQuestCounter.up();
-            console.log(this.oneQuestCounter.get());
 
             // 表示する文字を取得する
             label.text = this.quest.getQuest(this.quest_number-1) || " ";
