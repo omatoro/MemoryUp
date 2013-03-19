@@ -14,6 +14,10 @@
             this.count = 0;
         },
 
+        init : function () {
+            this.count = 0;
+        },
+
         up : function () {
             ++this.count;
         },

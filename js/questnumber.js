@@ -20,12 +20,10 @@
 
         // 問題の数字を返す
         getQuest : function (quest_number) {
-
             if (quest_number === undefined
             ||  typeof(quest_number) !== "number") {
                 return null;
             }
-
             return this.number[quest_number];
         },
 
