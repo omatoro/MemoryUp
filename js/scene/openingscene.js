@@ -58,10 +58,16 @@
             this.currentSettingQuestNumber = 10;
 
             // ゲーム開始ボタン
-            var startGameButton = tm.app.iPhoneButton(300, 60, "blue", "ゲーム開始");
-            startGameButton.setPosition(470, ns.SCREEN_HEIGHT-70);
+            var startGameButton = tm.app.iPhoneButton(280, 60, "blue", "ゲーム開始");
+            startGameButton.setPosition(480, ns.SCREEN_HEIGHT-70);
             this.addChild(startGameButton);
             this.startGameButton = startGameButton;
+
+            // 記録閲覧ボタン
+            var recordButton = tm.app.iPhoneButton(280, 60, "green", "記録閲覧");
+            recordButton.setPosition(160, ns.SCREEN_HEIGHT-70);
+            this.addChild(recordButton);
+            this.recordButton = recordButton;
 
             // ラベル表示
             this.fromJSON(UI_DATA.LABELS);
@@ -86,11 +92,12 @@
             var questNumber = this.settingQuestNumber.getUserAnswerName();
             if (questNumber !== null) { this.currentSettingQuestNumber = questNumber; }
 
-            // ゲーム開始ボタンが押されたらゲーム開始
+            // ボタン押下時の動作
             if (ns.app.pointing.getPointingEnd()) {
                 ns.app.pointing.getPointingEnd();
                 var mouse_position = ns.app.pointing;
 
+                // ゲーム開始ボタンが押されたらゲーム開始
                 if (this.startGameButton.isHitPoint(mouse_position.x, mouse_position.y)) {
                     ns.app.replaceScene(
                         ns.MainScene(
@@ -98,6 +105,10 @@
                             this.currentSettingSpeed,
                             this.currentSettingSpeedName,
                             this.currentSettingQuestNumber));
+                }
+                // 記録閲覧ボタンが押されたら画面を遷移する
+                if (this.recordButton.isHitPoint(mouse_position.x, mouse_position.y)) {
+                    ns.app.replaceScene(ns.RecordScene());
                 }
             }
         }
