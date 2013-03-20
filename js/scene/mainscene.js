@@ -12,8 +12,8 @@
             // スピードの名称を保持
             this.gameSpeedName = gameSpeedName;
 
-            // 問題数を保持
-            this.questNumber = questNumber;
+            // 問題数を保持(バック数＋問題数)->9バックにて9つ覚えてしまえばワーキングメモリを鍛えられない
+            this.questNumber = parseInt(questNumber) + backNum + 1;
 
             // ゲームスピード
             if      (gameSpeed === 0) { gameSpeed = 60; }
@@ -35,7 +35,7 @@
             this.backNum = backNum + 1;
 
             // 問題を作成するクラスを作成
-            this.memory = ns.Memory(this.backNum, this.gameSpeed, questNumber);
+            this.memory = ns.Memory(this.backNum, this.gameSpeed, this.questNumber);
 
             // 問題を表示するLabel
             this.drawedNum = tm.app.Label(" ", 50); // 生成

@@ -14,7 +14,7 @@
                 width: ns.SCREEN_WIDTH,
                 fillStyle: "white",
                 text: "バック数",
-                fontSize: 40,
+                fontSize: 30,
                 align: "left"
             }, {
                 type: "Label",
@@ -24,7 +24,7 @@
                 width: ns.SCREEN_WIDTH,
                 fillStyle: "white",
                 text: "ゲーム速度",
-                fontSize: 40,
+                fontSize: 30,
                 align: "left"
             }, {
                 type: "Label",
@@ -33,8 +33,8 @@
                 y: 630,
                 width: ns.SCREEN_WIDTH,
                 fillStyle: "white",
-                text: "問題数",
-                fontSize: 40,
+                text: "問題数(出題問題数は問題数+バック数)",
+                fontSize: 30,
                 align: "left"
             }]
         }
