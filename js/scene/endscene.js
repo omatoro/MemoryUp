@@ -39,6 +39,41 @@
             // スコア初期化
             RESULT_PARAM.score = speed + " " + backNum + "バック" + " " + score + " / " + questNumber + " 問正解！";
             this.superInit(RESULT_PARAM);
+
+            // ローカルストレージからデータを取得
+            var loadLocalStorage = localStorage["WEBack"];
+            if (loadLocalStorage) {
+                loadLocalStorage = JSON.parse(loadLocalStorage);
+            }
+            else {
+                loadLocalStorage = {
+                    data: []
+                };
+            }
+
+            var date = new Date();
+            var alldate = date.format("Y/m/d");
+            var year    = date.format("Y");
+            var month   = date.format("m");
+            var day     = date.format("d");
+
+            var memorizeData = {
+                date: {
+                    all: alldate,
+                    year: year,
+                    month: month,
+                    day: day,
+                },
+                score: score,
+                questNumber: questNumber,
+                back: backNum,
+                speed: speed
+            };
+
+            loadLocalStorage.data.push(memorizeData);
+            localStorage["WEBack"] = JSON.stringify(loadLocalStorage);
+
+            console.dir(loadLocalStorage);
         },
 
         update : function() {

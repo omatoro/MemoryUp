@@ -12,6 +12,8 @@
                 width :  ns.SCREEN_WIDTH,
                 height : ns.SCREEN_HEIGHT
             });
+
+            localStorage.removeItem("WEBack");
         },
 
         update : function() {
