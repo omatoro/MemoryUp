@@ -6,11 +6,14 @@
     ns.MainScene = tm.createClass({
         superClass : tm.app.Scene,
 
-        init : function(backNum, gameSpeed, gameSpeedName) {
+        init : function(backNum, gameSpeed, gameSpeedName, questNumber) {
             this.superInit();
 
             // スピードの名称を保持
             this.gameSpeedName = gameSpeedName;
+
+            // 問題数を保持
+            this.questNumber = questNumber;
 
             // ゲームスピード
             if      (gameSpeed === 0) { gameSpeed = 60; }
@@ -32,7 +35,7 @@
             this.backNum = backNum + 1;
 
             // 問題を作成するクラスを作成
-            this.memory = ns.Memory(this.backNum, this.gameSpeed);
+            this.memory = ns.Memory(this.backNum, this.gameSpeed, questNumber);
 
             // 問題を表示するLabel
             this.drawedNum = tm.app.Label(" ", 50); // 生成
@@ -48,7 +51,7 @@
                 var score = this.memory.getScore();
 
                 // スコアをエンドシーンで表示する
-                ns.app.replaceScene(ns.EndScene(score, this.backNum, this.gameSpeedName));
+                ns.app.replaceScene(ns.EndScene(score, this.backNum, this.gameSpeedName, this.questNumber));
             }
 
             this.memory.drawQuest(this.drawedNum);

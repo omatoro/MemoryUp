@@ -5,7 +5,7 @@
 
     ns.Memory = tm.createClass({
 
-        init : function(backNumber, gameSpeed) {
+        init : function(backNumber, gameSpeed, questNumber) {
             // 何問前の回答を答えるか
             this.back = backNumber || 1;
 
@@ -19,8 +19,11 @@
             this.drawedNum.width = 200; // 幅
             ns.app.currentScene.addChild(this.drawedNum); // シーンに追加
 
+            // 問題数を保持
+            this.questNumber = questNumber;
+
             // 問題を管理するクラスの生成
-            this.quest = ns.QuestNumber(this.back);
+            this.quest = ns.QuestNumber(this.back, questNumber);
 
             // カウンター(ゲーム全体)の初期化
             this.overGameCounter = ns.Counter();
@@ -102,7 +105,7 @@
 
         // 全ての問題が終了したか
         _finishQuest : function () {
-            if (this.current_quest_number >= ns.QUESTNUM) {
+            if (this.current_quest_number >= this.questNumber) {
                 return true;
             }
             return false;

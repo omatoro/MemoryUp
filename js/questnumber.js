@@ -8,9 +8,8 @@
         // 問題を格納した配列
         number : [],
 
-        init : function (_back) {
-
-            for ( var i = 0; i < _back + ns.QUESTNUM; ++i) {
+        init : function (_back, questNumber) {
+            for ( var i = 0; i < _back + questNumber; ++i) {
                 this.number[i] = tm.util.Random.randint(1, 9);
             }
 
@@ -29,7 +28,6 @@
 
         // 引数の問題数目の答えを返す
         getAunwer : function (quest_number) {
-
             if (0 <= quest_number && quest_number <= 10) {
                 return number[quest_number];
             }

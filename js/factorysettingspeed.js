@@ -3,13 +3,13 @@
  */
 (function(ns) {
 
-    var DRAW_Y = 500;
+    var DRAW_Y = 460;
     var BUTTON_POS_X = ns.BUTTON_SIZE_X;
     var BUTTON_POS_Y = ~~(ns.BUTTON_SIZE_Y/2);
     var BUTTON_SIZE_X = ~~(ns.BUTTON_SIZE_X/1.2);
     var BUTTON_SIZE_Y = ~~(ns.BUTTON_SIZE_Y/3);
 
-    var BUTTON_STRING = ["遅い", "早い", "最速"]
+    var BUTTON_STRING = ["遅い", "早い", "最速"];
 
     ns.FactorySettingSpeed = tm.createClass({
 
@@ -80,9 +80,6 @@
         },
 
         update : function () {
-        	// フェードイン、アウトするようボタンを起こす
-        	//this.once.call(true, this, this.wakeUpButtons);
-
             // ボタンの切り替え
             var user_answer = this.getUserAnswer(this.sprite);
             if (0 <= user_answer

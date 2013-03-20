@@ -20,7 +20,7 @@ var game = game || {};
     ns.BUTTON_START_DRAW_X = 320;
 
     // 問題数
-    ns.QUESTNUM = 10;
+    // ns.QUESTNUM = 10;
 
     // 何問前の答えを答えるか
     // ns.BACK_NUMBER = 2;
