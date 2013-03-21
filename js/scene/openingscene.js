@@ -3,7 +3,7 @@
  */
 (function(ns) {
 
-        // ラベルのリスト
+    // ラベルのリスト
     var UI_DATA = {
         LABELS: {
             children: [{

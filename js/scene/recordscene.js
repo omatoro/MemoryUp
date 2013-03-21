@@ -3,43 +3,6 @@
  */
 (function(ns) {
 
-        // ラベルのリスト
-    var UI_DATA = {
-        LABELS: {
-            children: [{
-                type: "Label",
-                name: "setting_backnum",
-                x: 20,
-                y: 60,
-                width: ns.SCREEN_WIDTH,
-                fillStyle: "white",
-                text: "バック数",
-                fontSize: 30,
-                align: "left"
-            }, {
-                type: "Label",
-                name: "setting_speed",
-                x: 20,
-                y: 450,
-                width: ns.SCREEN_WIDTH,
-                fillStyle: "white",
-                text: "ゲーム速度",
-                fontSize: 30,
-                align: "left"
-            }, {
-                type: "Label",
-                name: "setting_questnumber",
-                x: 20,
-                y: 630,
-                width: ns.SCREEN_WIDTH,
-                fillStyle: "white",
-                text: "問題数(出題問題数は問題数+バック数)",
-                fontSize: 30,
-                align: "left"
-            }]
-        }
-    };
-
     ns.RecordScene = tm.createClass({
         superClass : tm.app.Scene,
 
@@ -57,6 +20,68 @@
             // this.currentSettingSpeedName = "遅い";
             // this.currentSettingQuestNumber = 10;
 
+    var chartdata9 = {
+    
+      "config": {
+        "title": "Option bgGradient",
+        "subTitle": "bgGradient の from と to で背景グラデーションの色を替えられます",
+        "type": "stacked",
+        "barWidth": 48,
+        "colorSet": 
+              ["#666","#aaa","#5b7e91","#4c6cb3","#eee"],
+        "bgGradient": {
+                "direction":"vertical",
+                "from":"#222",
+                "to":"#4c6cb3"
+              }
+      },
+    
+      "data": [
+        ["年度",2007,2008,2009,2010,2011,2012,2013],
+        ["紅茶",335,352,527,448,775,835,979],
+        ["コーヒー",400,385,436,373,357,688,800],
+        ["ジュース",160,252,588,252,567,502,660],
+        ["ウーロン",100,183,352,120,302,400,1112]
+      ]
+    };
+var chartdata69 = {
+
+  "config": {
+    "title": "記録",
+    "subTitle": "",
+    "type": "line",
+    // "useMarker": "css-ring",
+    // "unit": "バック",
+    "useMarker": "arc",
+    "bgGradient": {
+        "direction":"vertical",
+        "from":"rgba(0,0,0,0)",
+        "to":"rgba(0,0,0,0)"
+    },
+    "lineWidth": 1,
+    "borderWidth": 4,
+    "markerWidth": 15,
+    "width" : ns.SCREEN_WIDTH,
+    "height" : ns.SCREEN_HEIGHT-100
+  },
+
+  "data": [
+    ["年度",2007,2008,2009,2010,2011,2012,2013],
+    ["ウーロン",5,5,5,6,5,5,4]
+  ]
+};
+
+
+            var chart = tm.graphics.Canvas();
+
+            chart.canvas.id = "world";
+
+            var test = ccchart.init(chart.canvas, chartdata69);
+            var sprite = tm.app.Sprite(ns.SCREEN_WIDTH, ns.SCREEN_HEIGHT-100, chart);
+            sprite.position.set(ns.SCREEN_WIDTH/2, ns.SCREEN_HEIGHT/2-50)
+            this.addChild(sprite);
+
+
             // 戻るボタン
             var openingSceneButton = tm.app.iPhoneButton(280, 60, "green", "戻る");
             openingSceneButton.setPosition(480, ns.SCREEN_HEIGHT-70);
@@ -68,9 +93,6 @@
             recordDeleteButton.setPosition(80, ns.SCREEN_HEIGHT-70);
             this.addChild(recordDeleteButton);
             this.recordDeleteButton = recordDeleteButton;
-
-            // ラベル表示
-            this.fromJSON(UI_DATA.LABELS);
         },
 
         update : function() {
