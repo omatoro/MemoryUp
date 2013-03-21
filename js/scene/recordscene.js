@@ -50,6 +50,7 @@ var chartdata69 = {
     "title": "記録",
     "subTitle": "",
     "type": "line",
+    "axisXLen": 28,
     // "useMarker": "css-ring",
     // "unit": "バック",
     "useMarker": "arc",
@@ -60,14 +61,15 @@ var chartdata69 = {
     },
     "lineWidth": 1,
     "borderWidth": 4,
-    "markerWidth": 15,
+    "markerWidth": 5,
     "width" : ns.SCREEN_WIDTH,
+    "paddingLeft": 80,
     "height" : ns.SCREEN_HEIGHT-100
   },
 
   "data": [
     ["年度",2007,2008,2009,2010,2011,2012,2013],
-    ["ウーロン",5,5,5,6,5,5,4]
+    ["記録",0,1.5,2.5,3,4,5,6,7,8,9,26,26,25,4,5,3]
   ]
 };
 
@@ -78,7 +80,7 @@ var chartdata69 = {
 
             var test = ccchart.init(chart.canvas, chartdata69);
             var sprite = tm.app.Sprite(ns.SCREEN_WIDTH, ns.SCREEN_HEIGHT-100, chart);
-            sprite.position.set(ns.SCREEN_WIDTH/2, ns.SCREEN_HEIGHT/2-50)
+            sprite.position.set(ns.SCREEN_WIDTH/2+15, ns.SCREEN_HEIGHT/2-50)
             this.addChild(sprite);
 
 
