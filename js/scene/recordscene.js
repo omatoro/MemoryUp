@@ -12,7 +12,7 @@
             // ccchart.jsによるチャート描画用のデータ作成
             var chartData = {
                 "config": {
-                    "title": "記録",
+                    "title": "",
                     "subTitle": "",
                     "type": "line",
                     "axisXLen": 27,

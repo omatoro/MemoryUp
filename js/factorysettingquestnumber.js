@@ -3,7 +3,7 @@
  */
 (function(ns) {
 
-    var DRAW_Y = 640;
+    var DRAW_Y = 660;
     var BUTTON_POS_X = ns.BUTTON_SIZE_X;
     var BUTTON_POS_Y = ~~(ns.BUTTON_SIZE_Y/2);
     var BUTTON_SIZE_X = ~~(ns.BUTTON_SIZE_X/1.2);
