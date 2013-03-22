@@ -1,10 +1,12 @@
 MemoryUp
+WEBackへ変更
 ========
 
 
 # 遊ぶ
 
 http://memoryup.testcording.com/
+http://weback.testcording.com/ へ変更
 
 # 遊び方
 
