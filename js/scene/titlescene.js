@@ -8,7 +8,7 @@
 
         init : function() {
             this.superInit({
-                title :  "記憶力向上げえむ",
+                title :  "WEBack",
                 width :  ns.SCREEN_WIDTH,
                 height : ns.SCREEN_HEIGHT
             });

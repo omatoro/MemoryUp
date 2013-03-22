@@ -17,9 +17,9 @@
 
     var RESULT_PARAM = {
             score: 256,
-            msg:      "【記憶力向上げえむ】",
-            hashtags: "omatoro",
-            url:      "http://testcording.com/",
+            msg:      "【WEBack】",
+            hashtags: ["omatoro", "nback課題", "n_back課題", "tmlib"],
+            url:      "http://weback.testcording.com/",
             width:    ns.SCREEN_WIDTH,
             height:   ns.SCREEN_HEIGHT,
             related:  "tmlib.js javascript testcording",
