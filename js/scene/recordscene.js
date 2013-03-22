@@ -50,10 +50,14 @@ var chartdata69 = {
     "title": "記録",
     "subTitle": "",
     "type": "line",
-    "axisXLen": 28,
+    "axisXLen": 27,
+    "axisXWidth": 1,
+    "maxY": 27,
+    "minY": 0,
+    "colorSet": ["#aaaaaa","yellow","","#4c6cb3","#eee"],
     // "useMarker": "css-ring",
     // "unit": "バック",
-    "useMarker": "arc",
+    "useMarker": "maru",
     "bgGradient": {
         "direction":"vertical",
         "from":"rgba(0,0,0,0)",
@@ -61,15 +65,16 @@ var chartdata69 = {
     },
     "lineWidth": 1,
     "borderWidth": 4,
-    "markerWidth": 5,
+    "markerWidth": 8,
     "width" : ns.SCREEN_WIDTH,
     "paddingLeft": 80,
     "height" : ns.SCREEN_HEIGHT-100
   },
 
   "data": [
-    ["年度",2007,2008,2009,2010,2011,2012,2013],
-    ["記録",0,1.5,2.5,3,4,5,6,7,8,9,26,26,25,4,5,3]
+    ["日付"],
+    ["未達成",[2,"yellow"],1.5,3,8,5,20,3,4,4,4],
+    ["達成"]
   ]
 };
 
