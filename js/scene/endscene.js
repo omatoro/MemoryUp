@@ -72,8 +72,6 @@
 
             loadLocalStorage.data.push(memorizeData);
             localStorage["WEBack"] = JSON.stringify(loadLocalStorage);
-
-            console.dir(loadLocalStorage);
         },
 
         update : function() {

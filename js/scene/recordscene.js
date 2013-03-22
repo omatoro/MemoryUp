@@ -9,81 +9,79 @@
         init : function() {
             this.superInit();
 
-            // ボタンの生成
-            // this.settingBackNumbers = ns.FactorySettingBackNumbers(this);
-            // this.settingSpeed       = ns.FactorySettingSpeed(this);
-            // this.settingQuestNumber = ns.FactorySettingQuestNumber(this);
+            // ccchart.jsによるチャート描画用のデータ作成
+            var chartData = {
+                "config": {
+                    "title": "記録",
+                    "subTitle": "",
+                    "type": "line",
+                    "axisXLen": 27,
+                    "axisXWidth": 1,
+                    "maxY": 27,
+                    "minY": 0,
+                    "colorSet": ["#aaaaaa","yellow","","#4c6cb3","#eee"],
+                    // "useMarker": "css-ring",
+                    // "unit": "バック",
+                    "useMarker": "maru",
+                    "bgGradient": {
+                        "direction":"vertical",
+                        "from":"rgba(0,0,0,0)",
+                        "to":"rgba(0,0,0,0)"
+                    },
+                    "lineWidth": 1,
+                    "borderWidth": 4,
+                    "markerWidth": 8,
+                    "width" : ns.SCREEN_WIDTH,
+                    "paddingLeft": 80,
+                    "height" : ns.SCREEN_HEIGHT-100
+                },
 
-            // セッティングデータ
-            // this.currentSettingBackNumber = 0;
-            // this.currentSettingSpeed = 0;
-            // this.currentSettingSpeedName = "遅い";
-            // this.currentSettingQuestNumber = 10;
+                "data": [
+                    ["日付"],
+                    ["未達成"],
+                    ["達成"]
+                ]
+            };
 
-    var chartdata9 = {
-    
-      "config": {
-        "title": "Option bgGradient",
-        "subTitle": "bgGradient の from と to で背景グラデーションの色を替えられます",
-        "type": "stacked",
-        "barWidth": 48,
-        "colorSet": 
-              ["#666","#aaa","#5b7e91","#4c6cb3","#eee"],
-        "bgGradient": {
-                "direction":"vertical",
-                "from":"#222",
-                "to":"#4c6cb3"
-              }
-      },
-    
-      "data": [
-        ["年度",2007,2008,2009,2010,2011,2012,2013],
-        ["紅茶",335,352,527,448,775,835,979],
-        ["コーヒー",400,385,436,373,357,688,800],
-        ["ジュース",160,252,588,252,567,502,660],
-        ["ウーロン",100,183,352,120,302,400,1112]
-      ]
-    };
-var chartdata69 = {
+            // ローカルストレージからデータを取得
+            var loadLocalStorage = localStorage["WEBack"];
+            if (loadLocalStorage) {
+                loadLocalStorage = JSON.parse(loadLocalStorage);
+            }
+            else {
+                loadLocalStorage = {
+                    data: []
+                };
+            }
 
-  "config": {
-    "title": "記録",
-    "subTitle": "",
-    "type": "line",
-    "axisXLen": 27,
-    "axisXWidth": 1,
-    "maxY": 27,
-    "minY": 0,
-    "colorSet": ["#aaaaaa","yellow","","#4c6cb3","#eee"],
-    // "useMarker": "css-ring",
-    // "unit": "バック",
-    "useMarker": "maru",
-    "bgGradient": {
-        "direction":"vertical",
-        "from":"rgba(0,0,0,0)",
-        "to":"rgba(0,0,0,0)"
-    },
-    "lineWidth": 1,
-    "borderWidth": 4,
-    "markerWidth": 8,
-    "width" : ns.SCREEN_WIDTH,
-    "paddingLeft": 80,
-    "height" : ns.SCREEN_HEIGHT-100
-  },
+            // ローカルストレージから取得したデータをチャート用に変換する
+            for (var i = 0; i < loadLocalStorage.data.length; ++i) {
+                // 表示上必要なスコア(3back,高速,の場合は9となる)
+                var chartScore = 0;
 
-  "data": [
-    ["日付"],
-    ["未達成",[2,"yellow"],1.5,3,8,5,20,3,4,4,4],
-    ["達成"]
-  ]
-};
+                // スピードによってスコアが変化するので計算する
+                var speed = loadLocalStorage.data[i].speed;
+                if      (speed === "遅い") { speed = -2; }
+                else if (speed === "早い") { speed = -1; }
+                else if (speed === "最速") { speed = 0; }
 
+                // バック数がチャート上どの位置になるか計算する
+                chartScore = loadLocalStorage.data[i].back　* 3 + speed;
+
+                // 正解数が全問正解の場合はマーカーの色を変える
+                if (loadLocalStorage.data[i].score === loadLocalStorage.data[i].questNumber) {
+                    chartData.data[1].push([chartScore, "yellow"]);
+                }
+                // 全問正解でない場合はそのままの色で出力する
+                else {
+                    chartData.data[1].push(chartScore);
+                }
+            }
+            
 
             var chart = tm.graphics.Canvas();
-
             chart.canvas.id = "world";
-
-            var test = ccchart.init(chart.canvas, chartdata69);
+            var test = ccchart.init(chart.canvas, chartData);
             var sprite = tm.app.Sprite(ns.SCREEN_WIDTH, ns.SCREEN_HEIGHT-100, chart);
             sprite.position.set(ns.SCREEN_WIDTH/2+15, ns.SCREEN_HEIGHT/2-50)
             this.addChild(sprite);
@@ -91,13 +89,13 @@ var chartdata69 = {
 
             // 戻るボタン
             var openingSceneButton = tm.app.iPhoneButton(280, 60, "green", "戻る");
-            openingSceneButton.setPosition(480, ns.SCREEN_HEIGHT-70);
+            openingSceneButton.setPosition(160, ns.SCREEN_HEIGHT-70);
             this.addChild(openingSceneButton);
             this.openingSceneButton = openingSceneButton;
 
             // 記録削除ボタン
             var recordDeleteButton = tm.app.iPhoneButton(120, 60, "red", "記録削除");
-            recordDeleteButton.setPosition(80, ns.SCREEN_HEIGHT-70);
+            recordDeleteButton.setPosition(560, ns.SCREEN_HEIGHT-70);
             this.addChild(recordDeleteButton);
             this.recordDeleteButton = recordDeleteButton;
         },
@@ -132,7 +130,7 @@ var chartdata69 = {
                 }
 
                 // 記録削除ボタンが押されたらlocalStorageの内容を削除する
-                if (this.openingSceneButton.isHitPoint(mouse_position.x, mouse_position.y)) {
+                if (this.recordDeleteButton.isHitPoint(mouse_position.x, mouse_position.y)) {
                     localStorage.removeItem("WEBack");
                 }
             }
