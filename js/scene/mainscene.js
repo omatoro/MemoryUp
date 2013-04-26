@@ -32,7 +32,6 @@
             this.backNum = backNum + 1;
 
             // 問題を作成するクラスを作成
-            console.log("MainScene : " + questNumber);
             this.memory = ns.Memory(this.backNum, this.gameSpeed, this.questNumber);
 
             // 問題を表示するLabel
@@ -49,7 +48,7 @@
                 var score = this.memory.getScore();
 
                 // スコアをエンドシーンで表示する
-                ns.app.replaceScene(ns.EndScene(score, this.backNum, this.gameSpeedName, this.questNumber));
+                ns.app.replaceScene(ns.EndScene(score, this.backNum, this.gameSpeed, this.gameSpeedName, this.questNumber));
             }
 
             this.memory.drawQuest(this.drawedNum);

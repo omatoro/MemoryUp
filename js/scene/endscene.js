@@ -35,10 +35,17 @@
         // タイトル移動へのボタン
         title_button : {},
 
-        init : function(score, backNum, speed, questNumber) {
+        init : function(score, backNum, speed, speedName, questNumber) {
             // スコア初期化
-            RESULT_PARAM.score = speed + " " + backNum + "バック" + " " + score + " / " + questNumber + " 問正解！";
+            RESULT_PARAM.score = speedName + " " + backNum + "バック" + " " + score + " / " + questNumber + " 問正解！";
             this.superInit(RESULT_PARAM);
+
+            this.gameData = {
+                back: backNum,
+                speed: speed,
+                speedName: speedName,
+                quest: questNumber
+            }
 
             // ローカルストレージからデータを取得
             var loadLocalStorage = localStorage["WEBack"];
@@ -57,7 +64,7 @@
             var month   = date.format("m");
             var day     = date.format("d");
 
-            var memorizeData = {
+            memorizeData = {
                 date: {
                     all: alldate,
                     year: year,
@@ -67,7 +74,7 @@
                 score: score,
                 questNumber: questNumber,
                 back: backNum,
-                speed: speed
+                speed: speedName
             };
 
             loadLocalStorage.data.push(memorizeData);
@@ -80,7 +87,11 @@
         // Backボタンを押したら、onpointingstart->インスタンス.dispatchEventにより
         // 以下onnextsceneイベントが実行される
         onnextscene : function () {
-            ns.app.replaceScene(ns.OpeningScene());
+            ns.app.replaceScene(ns.OpeningScene(
+                this.gameData.back-1,
+                this.gameData.speed,
+                this.gameData.speedName,
+                this.gameData.quest - this.gameData.back));
         },
     });
 

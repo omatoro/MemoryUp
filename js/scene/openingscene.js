@@ -43,7 +43,7 @@
     ns.OpeningScene = tm.createClass({
         superClass : tm.app.Scene,
 
-        init : function() {
+        init : function(backnum, speed, speedName, questnum) {
             this.superInit();
 
             // ボタンの生成
@@ -52,10 +52,10 @@
             this.settingQuestNumber = ns.FactorySettingQuestNumber(this);
 
             // セッティングデータ
-            this.currentSettingBackNumber = 0;
-            this.currentSettingSpeed = 0;
-            this.currentSettingSpeedName = "遅い";
-            this.currentSettingQuestNumber = 10;
+            this.currentSettingBackNumber  = backnum   || 0;
+            this.currentSettingSpeed       = speed     || 60;
+            this.currentSettingSpeedName   = speedName || "遅い";
+            this.currentSettingQuestNumber = questnum  || 10;
 
             // ゲーム開始ボタン
             var startGameButton = tm.app.GlossyButton(280, 60, "blue", "ゲーム開始");
@@ -94,11 +94,6 @@
 
                 // ゲーム開始ボタンが押されたらゲーム開始
                 if (this.startGameButton.isHitPoint(mouse_position.x, mouse_position.y)) {
-
-                    console.log(this.currentSettingBackNumber);
-                    console.log(this.currentSettingSpeed);
-                    console.log(this.currentSettingSpeedName);
-                    console.log(this.currentSettingQuestNumber);
 
                     ns.app.replaceScene(
                         ns.MainScene(
