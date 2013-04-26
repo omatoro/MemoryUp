@@ -88,13 +88,13 @@
 
 
             // 戻るボタン
-            var openingSceneButton = tm.app.iPhoneButton(280, 60, "green", "戻る");
+            var openingSceneButton = tm.app.GlossyButton(280, 60, "green", "戻る");
             openingSceneButton.setPosition(160, ns.SCREEN_HEIGHT-70);
             this.addChild(openingSceneButton);
             this.openingSceneButton = openingSceneButton;
 
             // 記録削除ボタン
-            var recordDeleteButton = tm.app.iPhoneButton(120, 60, "red", "記録削除");
+            var recordDeleteButton = tm.app.GlossyButton(120, 60, "red", "記録削除");
             recordDeleteButton.setPosition(560, ns.SCREEN_HEIGHT-70);
             this.addChild(recordDeleteButton);
             this.recordDeleteButton = recordDeleteButton;

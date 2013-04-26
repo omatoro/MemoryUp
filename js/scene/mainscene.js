@@ -16,9 +16,6 @@
             this.questNumber = parseInt(questNumber) + backNum + 1;
 
             // ゲームスピード
-            if      (gameSpeed === 0) { gameSpeed = 60; }
-            else if (gameSpeed === 1) { gameSpeed = 30; }
-            else if (gameSpeed === 2) { gameSpeed = 20; }
             this.gameSpeed = gameSpeed;
 
             // タイマーの生成
@@ -35,6 +32,7 @@
             this.backNum = backNum + 1;
 
             // 問題を作成するクラスを作成
+            console.log("MainScene : " + questNumber);
             this.memory = ns.Memory(this.backNum, this.gameSpeed, this.questNumber);
 
             // 問題を表示するLabel

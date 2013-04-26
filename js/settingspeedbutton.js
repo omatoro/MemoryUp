@@ -5,7 +5,7 @@
 
     ns.SettingSpeedButton = tm.createClass({
 
-        superClass : tm.app.iPhoneButton,
+        superClass : tm.app.GlossyButton,
 
         init : function(string, buttonSizeX, buttonSizeY, positionX, positionY) {
             this.superInit(buttonSizeX, buttonSizeY, "gray", string);
@@ -32,6 +32,6 @@
         },
     });
 
-    tm.app.iPhoneButton.DEFAULT_ALPHA = 0.8;
+    tm.app.GlossyButton.DEFAULT_ALPHA = 0.8;
 
 })(game);

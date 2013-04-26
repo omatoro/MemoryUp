@@ -9,7 +9,7 @@
             children: [{
                 type: "Label",
                 name: "setting_backnum",
-                x: 20,
+                x: 40,
                 y: 80,
                 width: ns.SCREEN_WIDTH,
                 fillStyle: "white",
@@ -19,8 +19,8 @@
             }, {
                 type: "Label",
                 name: "setting_speed",
-                x: 20,
-                y: 470,
+                x: 40,
+                y: 170,
                 width: ns.SCREEN_WIDTH,
                 fillStyle: "white",
                 text: "ゲーム速度",
@@ -29,11 +29,11 @@
             }, {
                 type: "Label",
                 name: "setting_questnumber",
-                x: 20,
-                y: 650,
+                x: 40,
+                y: 260,
                 width: ns.SCREEN_WIDTH,
                 fillStyle: "white",
-                text: "問題数(出題問題数は問題数+バック数)",
+                text: "問題数",
                 fontSize: 30,
                 align: "left"
             }]
@@ -58,13 +58,13 @@
             this.currentSettingQuestNumber = 10;
 
             // ゲーム開始ボタン
-            var startGameButton = tm.app.iPhoneButton(280, 60, "blue", "ゲーム開始");
+            var startGameButton = tm.app.GlossyButton(280, 60, "blue", "ゲーム開始");
             startGameButton.setPosition(480, ns.SCREEN_HEIGHT-70);
             this.addChild(startGameButton);
             this.startGameButton = startGameButton;
 
             // 記録閲覧ボタン
-            var recordButton = tm.app.iPhoneButton(280, 60, "green", "記録閲覧");
+            var recordButton = tm.app.GlossyButton(280, 60, "green", "記録閲覧");
             recordButton.setPosition(160, ns.SCREEN_HEIGHT-70);
             this.addChild(recordButton);
             this.recordButton = recordButton;
@@ -74,11 +74,6 @@
         },
 
         update : function() {
-            // セッティング処理を実行
-            this.settingBackNumbers.update();
-            this.settingSpeed.update();
-            this.settingQuestNumber.update();
-
             // 選択しているバック数を取得
             var backNumber = this.settingBackNumbers.getUserAnswer();
             if (backNumber !== null) { this.currentSettingBackNumber = backNumber; }
@@ -89,7 +84,7 @@
             if (speed !== null) { this.currentSettingSpeed = speed; this.currentSettingSpeedName = speedName; }
 
             // 選択している問題数を取得
-            var questNumber = this.settingQuestNumber.getUserAnswerName();
+            var questNumber = this.settingQuestNumber.getUserAnswer();
             if (questNumber !== null) { this.currentSettingQuestNumber = questNumber; }
 
             // ボタン押下時の動作
@@ -99,6 +94,12 @@
 
                 // ゲーム開始ボタンが押されたらゲーム開始
                 if (this.startGameButton.isHitPoint(mouse_position.x, mouse_position.y)) {
+
+                    console.log(this.currentSettingBackNumber);
+                    console.log(this.currentSettingSpeed);
+                    console.log(this.currentSettingSpeedName);
+                    console.log(this.currentSettingQuestNumber);
+
                     ns.app.replaceScene(
                         ns.MainScene(
                             this.currentSettingBackNumber,

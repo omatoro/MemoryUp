@@ -5,7 +5,7 @@
 
     ns.NumberButton = tm.createClass({
 
-        superClass : tm.app.iPhoneButton,
+        superClass : tm.app.GlossyButton,
 
         init : function(number, buttonSizeX, buttonSizeY, positionX, positionY) {
             this.superInit(buttonSizeX, buttonSizeY, "rgb(80,20,20)", number);
@@ -43,6 +43,6 @@
         },
     });
 
-    tm.app.iPhoneButton.DEFAULT_ALPHA = 0.8;
+    tm.app.GlossyButton.DEFAULT_ALPHA = 0.8;
 
 })(game);
