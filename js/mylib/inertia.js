@@ -68,10 +68,10 @@
 	            return getMovedInertiaLength();
 	        }
 
-	        //this.inertia.x += diffPosition/10;
+	        this.inertia.x += diffPosition/10;
 	        this.inertia.y += diffPosition/10;
 
-	        // this.inertia.x /= middlePoint;
+	        this.inertia.x /= middlePoint;
 	        this.inertia.y /= middlePoint;
 
 	        return this.inertia;

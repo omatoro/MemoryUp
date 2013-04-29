@@ -10,38 +10,40 @@
             this.superInit();
 
             // ccchart.jsによるチャート描画用のデータ作成
-            var chartData = {
-                "config": {
-                    "title": "",
-                    "subTitle": "",
-                    "type": "line",
-                    "axisXLen": 27,
-                    "axisXWidth": 1,
-                    "maxY": 27,
-                    "minY": 0,
-                    "colorSet": ["#aaaaaa","yellow","","#4c6cb3","#eee"],
-                    // "useMarker": "css-ring",
-                    // "unit": "バック",
-                    "useMarker": "maru",
-                    "bgGradient": {
-                        "direction":"vertical",
-                        "from":"rgba(0,0,0,0)",
-                        "to":"rgba(0,0,0,0)"
-                    },
-                    "lineWidth": 1,
-                    "borderWidth": 4,
-                    "markerWidth": 8,
-                    "width" : ns.SCREEN_WIDTH,
-                    "paddingLeft": 80,
-                    "height" : ns.SCREEN_HEIGHT-100
-                },
+            // var chartData = {
+            //     "config": {
+            //         "title": "",
+            //         "subTitle": "",
+            //         "type": "line",
+            //         "axisXLen": 27,
+            //         "axisXWidth": 1,
+            //         "maxY": 27,
+            //         "minY": 0,
+            //         "colorSet": ["#aaaaaa","yellow","","#4c6cb3","#eee"],
+            //         // "useMarker": "css-ring",
+            //         // "unit": "バック",
+            //         "useMarker": "maru",
+            //         "bgGradient": {
+            //             "direction":"vertical",
+            //             "from":"rgba(0,0,0,0)",
+            //             "to":"rgba(0,0,0,0)"
+            //         },
+            //         "lineWidth": 1,
+            //         "borderWidth": 4,
+            //         "markerWidth": 8,
+            //         "width" : ns.SCREEN_WIDTH,
+            //         "paddingLeft": 80,
+            //         "height" : ns.SCREEN_HEIGHT-100
+            //     },
 
-                "data": [
-                    ["日付"],
-                    ["未達成"],
-                    ["達成"]
-                ]
-            };
+            //     "data": [
+            //         ["日付"],
+            //         ["未達成"],
+            //         ["達成"]
+            //     ]
+            // };
+
+
 
             // ローカルストレージからデータを取得
             var loadLocalStorage = localStorage["WEBack"];
@@ -54,37 +56,112 @@
                 };
             }
 
+            // // ローカルストレージから取得したデータをチャート用に変換する
+            // for (var i = 0; i < loadLocalStorage.data.length; ++i) {
+            //     // 表示上必要なスコア(3back,高速,の場合は9となる)
+            //     var chartScore = 0;
+
+            //     // スピードによってスコアが変化するので計算する
+            //     var speed = loadLocalStorage.data[i].speed;
+            //     if      (speed === "遅い") { speed = -2; }
+            //     else if (speed === "早い") { speed = -1; }
+            //     else if (speed === "最速") { speed = 0; }
+
+            //     // バック数がチャート上どの位置になるか計算する
+            //     chartScore = loadLocalStorage.data[i].back　* 3 + speed;
+
+            //     // 正解数が全問正解の場合はマーカーの色を変える
+            //     if (loadLocalStorage.data[i].score === loadLocalStorage.data[i].questNumber) {
+            //         chartData.data[1].push([chartScore, "yellow"]);
+            //     }
+            //     // 全問正解でない場合はそのままの色で出力する
+            //     else {
+            //         chartData.data[1].push(chartScore);
+            //     }
+            // }
+            
+            // chart
+            // var chart = tm.graphics.Canvas();
+            // chart.canvas.id = "world";
+            // var test = ccchart.init(chart.canvas, chartData);
+            // var sprite = tm.app.Sprite(ns.SCREEN_WIDTH, ns.SCREEN_HEIGHT-100, chart);
+            // sprite.position.set(ns.SCREEN_WIDTH/2+15, ns.SCREEN_HEIGHT/2-50)
+
+            var CHART = {
+                config: {
+                    // width: , // 自動計算
+                    height: ns.SCREEN_HEIGHT-120,
+                    column: loadLocalStorage.data.length,
+                    minColumn: 3,
+                    row: 20,
+                    gridWidth: 1,
+                    gridStyle: "rgba(255, 255, 255, 1.0)",
+                    rightPadding: 220,
+                    topPadding: 100,
+                    leftPadding: 120,
+                    bottomPadding: 50,
+                    type: "ring",
+                    line: true,
+                    lineChartWidth: 10,
+                    lineChartStyle: "rgba(55, 120, 220, 1.0)",
+                    maxData: 60, // 左側の見出しの数値を切り良くするときは、maxDataとrowの数をあわせる
+                    isLeftHead: true,
+                },
+                data: {
+                    head: " ",
+                    leftHead: [],
+                    bottomHead: [],
+                    chart: [
+                        []
+                    ],
+                    baloon: [
+                        []
+                    ]
+                }
+            };
+
+            CHART.data.leftHead.push(" ");
+            for (var i = 0; i < 20; ++i) {
+                CHART.data.leftHead.push((i+1) + "-back");
+            }
+
             // ローカルストレージから取得したデータをチャート用に変換する
-            for (var i = 0; i < loadLocalStorage.data.length; ++i) {
-                // 表示上必要なスコア(3back,高速,の場合は9となる)
+            for (var i = 0; i < CHART.config.column; ++i) {
+                // 表示上必要なスコア(3back,最速,の場合は9となる)
                 var chartScore = 0;
 
                 // スピードによってスコアが変化するので計算する
                 var speed = loadLocalStorage.data[i].speed;
-                if      (speed === "遅い") { speed = -2; }
-                else if (speed === "早い") { speed = -1; }
-                else if (speed === "最速") { speed = 0; }
+                var speedNum = 0;
+                if      (speed === "遅い") { speedNum = -2; }
+                else if (speed === "早い") { speedNum = -1; }
+                else if (speed === "最速") { speedNum = 0; }
 
                 // バック数がチャート上どの位置になるか計算する
-                chartScore = loadLocalStorage.data[i].back　* 3 + speed;
+                chartScore = loadLocalStorage.data[i].back　* 3 + speedNum;
 
-                // 正解数が全問正解の場合はマーカーの色を変える
-                if (loadLocalStorage.data[i].score === loadLocalStorage.data[i].questNumber) {
-                    chartData.data[1].push([chartScore, "yellow"]);
-                }
-                // 全問正解でない場合はそのままの色で出力する
-                else {
-                    chartData.data[1].push(chartScore);
-                }
+                CHART.data.chart[0].push(chartScore);
+                CHART.data.baloon[0].push(
+                    speed + " " + loadLocalStorage.data[i].back + "-back " + 
+                    loadLocalStorage.data[i].score + "/" + loadLocalStorage.data[i].questNumber + "正解");
+                CHART.data.bottomHead.push(loadLocalStorage.data[i].date.all);
+
+                // // 正解数が全問正解の場合はマーカーの色を変える
+                // if (loadLocalStorage.data[i].score === loadLocalStorage.data[i].questNumber) {
+                //     chartData.data[1].push([chartScore, "yellow"]);
+                // }
+                // // 全問正解でない場合はそのままの色で出力する
+                // else {
+                //     chartData.data[1].push(chartScore);
+                // }
             }
-            
 
-            var chart = tm.graphics.Canvas();
-            chart.canvas.id = "world";
-            var test = ccchart.init(chart.canvas, chartData);
-            var sprite = tm.app.Sprite(ns.SCREEN_WIDTH, ns.SCREEN_HEIGHT-100, chart);
-            sprite.position.set(ns.SCREEN_WIDTH/2+15, ns.SCREEN_HEIGHT/2-50)
-            this.addChild(sprite);
+
+            var chart = ns.TMChart(CHART);
+            var CHART_TOP_PADDING  = 0;
+            var CHART_LEFT_PADDING = 0;
+            chart.setPositionTopLeft(CHART_LEFT_PADDING, CHART_TOP_PADDING);
+            this.addChild(chart);
 
 
             // 戻るボタン
