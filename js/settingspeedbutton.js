@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ボタン一つのクラス
  */
 (function(ns) {
@@ -24,7 +24,7 @@
         	}
         },
 
-        sellect : function () {
+        select : function () {
         	if (this.currentColor !== "black") {
         		this.setBackgroundColor("black");
         		this.currentColor = "black";
