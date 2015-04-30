@@ -57,7 +57,6 @@
             if (this.memory.isStartGame()) {
             	this.buttons.update();
             }
-
         }
     });
 
